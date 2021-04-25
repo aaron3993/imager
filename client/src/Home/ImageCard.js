@@ -7,7 +7,7 @@ import axios from "axios";
 import "./ImageCard.css";
 
 const ImageCard = (props) => {
-  const { image } = props;
+  const { image, albums } = props;
 
   async function addToCollection() {
     try {
@@ -17,7 +17,6 @@ const ImageCard = (props) => {
       console.log(err);
     }
   }
-  const albums = [];
 
   const options = albums
     ? albums.map((album) => {

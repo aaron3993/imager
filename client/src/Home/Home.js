@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import SearchBar from "./SearchBar";
 import ImageList from "./ImageList";
 
 const Home = (props) => {
@@ -19,6 +18,7 @@ const Home = (props) => {
     console.log(response);
     setImages(response.data.results);
   };
+
   return (
     <div>
       <input

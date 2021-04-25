@@ -12,6 +12,7 @@ const App = (props) => {
   useEffect(() => {
     async function getAlbums() {
       let res = await axios.get("http://localhost:8080/albums");
+      console.log(res.data);
       setAlbums(res.data);
     }
 

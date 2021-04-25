@@ -11,9 +11,9 @@ export const getAlbums = async (req, res) => {
 
 export const addAlbum = async (req, res) => {
   const album = req.body;
+  console.log(album);
   const newAlbum = new Album({
-    name: album.name,
-    images: album.images,
+    title: album.title,
   });
 
   try {
