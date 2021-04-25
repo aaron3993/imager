@@ -4,6 +4,7 @@ const imageSchema = mongoose.Schema({
   description: String,
   url: String,
   alt_description: String,
+  likes: Number,
   author: String,
   createdAt: {
     type: Date,

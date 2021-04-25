@@ -12,7 +12,13 @@ export const getImages = async (req, res) => {
 
 export const addImage = async (req, res) => {
   const image = req.body;
-  const newImage = new Image(image);
+  const newImage = new Image({
+    description: image.description,
+    url: image.urls.regular,
+    alt_description: image.urls.alt_description,
+    likes: image.likes,
+    author: image.user.links.name,
+  });
 
   try {
     await newImage.save();
