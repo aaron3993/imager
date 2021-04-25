@@ -3,14 +3,14 @@ import axios from "axios";
 
 // import AddToAlbumButton from "./AddToAlbumButton";
 
-import "./ImageCard.css";
+import "../Home/ImageCard.css";
 
-const ImageCard = (props) => {
+const CollectionImageCard = (props) => {
   const image = props.image;
 
-  async function addToCollection() {
+  async function addToAlbum() {
     try {
-      await axios.post("http://localhost:8080/images", image);
+      await axios.post("http://localhost:8080/albums", image);
       console.log("Post request successful");
     } catch (err) {
       console.log(err);
@@ -19,8 +19,8 @@ const ImageCard = (props) => {
 
   return (
     <div className="image-card">
-      <img src={image.urls.regular} alt={image.alt_description} />
-      <button onClick={() => addToCollection()}>Add</button>
+      <img src={image.url} alt={image.alt_description} />
+      <button onClick={() => addToAlbum()}>Add</button>
       {/* <h3 className="image-description">{image.description}</h3> */}
       {/* <AddToAlbumButton
         className="add-to-album-button"
@@ -32,4 +32,4 @@ const ImageCard = (props) => {
   );
 };
 
-export default ImageCard;
+export default CollectionImageCard;

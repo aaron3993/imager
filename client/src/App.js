@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./Home/Home";
-import Collection from "./Collection";
+import CollectionList from "./Collection/CollectionList";
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
         <Route
           path="/collection"
           exact
-          render={(props) => <Collection {...props} />}
+          render={(props) => <CollectionList {...props} />}
         />
       </Switch>
     </BrowserRouter>
