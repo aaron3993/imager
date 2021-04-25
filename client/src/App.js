@@ -7,7 +7,7 @@ import CollectionList from "./Collection/CollectionList";
 import AlbumList from "./Albums/AlbumList";
 
 const App = (props) => {
-  const [albums, setAlbums] = useState([{ name: "Cars" }]);
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
     async function getAlbums() {

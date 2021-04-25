@@ -9,17 +9,17 @@ export const getAlbums = async (req, res) => {
   }
 };
 
-// export const addAlbum = async (req, res) => {
-//   const album = req.body;
-//   const newAlbum = new Album({
-//     name: album.name,
-//     images: album.images,
-//   });
+export const addAlbum = async (req, res) => {
+  const album = req.body;
+  const newAlbum = new Album({
+    name: album.name,
+    images: album.images,
+  });
 
-//   try {
-//     await newAlbum.save();
-//     res.status(201).json(newAlbum);
-//   } catch (err) {
-//     res.status(409).json({ message: err.message });
-//   }
-// };
+  try {
+    await newAlbum.save();
+    res.status(201).json(newAlbum);
+  } catch (err) {
+    res.status(409).json({ message: err.message });
+  }
+};

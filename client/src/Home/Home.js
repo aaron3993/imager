@@ -7,6 +7,7 @@ import ImageList from "./ImageList";
 const Home = (props) => {
   const { albums, setAlbums } = props;
   const [images, setImages] = useState([]);
+  const [search, setSearch] = useState("");
 
   const searchImages = async (term) => {
     const response = await axios.get("https://api.unsplash.com/search/photos", {
@@ -20,7 +21,12 @@ const Home = (props) => {
   };
   return (
     <div>
-      <SearchBar onSubmit={searchImages} />
+      <input
+        placeholder="Search images..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <button onClick={() => searchImages(search)}>Search Images</button>
       <ImageList images={images} albums={albums} />
     </div>
   );

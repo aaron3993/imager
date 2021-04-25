@@ -25,7 +25,11 @@ const AlbumList = (props) => {
       <h1>Albums</h1>
       <input />
       <button>Add Album</button>
-      <ul>{albumList}</ul>
+      {albums.length ? (
+        <ul>{albumList}</ul>
+      ) : (
+        <p>You do not have any albums.</p>
+      )}
     </div>
   );
 };
