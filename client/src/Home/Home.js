@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import ImageList from "./ImageList";
 
 const Home = (props) => {
+  const { albums, setAlbums } = props;
   const [images, setImages] = useState([]);
 
   const searchImages = async (term) => {
@@ -20,7 +21,7 @@ const Home = (props) => {
   return (
     <div>
       <SearchBar onSubmit={searchImages} />
-      <ImageList images={images} />
+      <ImageList images={images} albums={albums} />
     </div>
   );
 };

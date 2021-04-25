@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import imageRoutes from "./routes/images.js";
+import albumRoutes from "./routes/albums.js";
 
 const app = express();
 dotenv.config();
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/images", imageRoutes);
-// app.use("/albums", albumRoutes);
+app.use("/albums", albumRoutes);
 
 const PORT = process.env.PORT || 8080;
 

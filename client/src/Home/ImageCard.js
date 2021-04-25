@@ -1,4 +1,5 @@
 import React from "react";
+import Select from "react-select";
 import axios from "axios";
 
 // import AddToAlbumButton from "./AddToAlbumButton";
@@ -6,7 +7,7 @@ import axios from "axios";
 import "./ImageCard.css";
 
 const ImageCard = (props) => {
-  const image = props.image;
+  const { image } = props;
 
   async function addToCollection() {
     try {
@@ -16,10 +17,21 @@ const ImageCard = (props) => {
       console.log(err);
     }
   }
+  const albums = [];
+
+  const options = albums
+    ? albums.map((album) => {
+        return { value: album.name, label: album.name };
+      })
+    : null;
 
   return (
     <div className="image-card">
-      <img src={image.urls.regular} alt={image.alt_description} />
+      <div className="card-image">
+        <img src={image.urls.regular} alt={image.alt_description} />
+      </div>
+      <Select options={options} placeholder="Select an album" />
+      {/* <button onClick={() => addToAlbum()}>Add to Album</button> */}
       <button onClick={() => addToCollection()}>Add</button>
       {/* <h3 className="image-description">{image.description}</h3> */}
       {/* <AddToAlbumButton
