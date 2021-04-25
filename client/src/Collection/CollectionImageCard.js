@@ -6,12 +6,12 @@ import axios from "axios";
 import "../Home/ImageCard.css";
 
 const CollectionImageCard = (props) => {
-  const { image, collection, setCollection } = props;
-  console.log(image);
+  const { collectionImage, collectionImages, setCollectionImages } = props;
+  console.log(collectionImage);
 
   async function addToAlbum() {
     try {
-      await axios.post("http://localhost:8080/albums", image);
+      await axios.post("http://localhost:8080/albums", collectionImage);
       console.log("Post request successful");
     } catch (err) {
       console.log(err);
@@ -20,13 +20,13 @@ const CollectionImageCard = (props) => {
 
   async function removeImage() {
     try {
-      await axios.delete(`http://localhost:8080/images/${image._id}`);
-      const collectionToBeRemovedIndex = collection.findIndex(
-        (collectionImage) => collectionImage._id === image._id
+      await axios.delete(`http://localhost:8080/images/${collectionImage._id}`);
+      const collectionToBeRemovedIndex = collectionImages.findIndex(
+        (image) => image._id === collectionImage._id
       );
-      const collectionCopy = [...collection];
+      const collectionCopy = [...collectionImages];
       collectionCopy.splice(collectionToBeRemovedIndex, 1);
-      setCollection(collectionCopy);
+      setCollectionImages(collectionCopy);
     } catch (err) {
       console.log(err);
     }
@@ -34,15 +34,15 @@ const CollectionImageCard = (props) => {
 
   return (
     <div className="image-card">
-      <img src={image.url} alt={image.alt_description} />
+      <img src={collectionImage.url} alt={collectionImage.alt_description} />
       <button onClick={() => addToAlbum()}>Add</button>
       <button onClick={() => removeImage()}>Remove</button>
-      {/* <h3 className="image-description">{image.description}</h3> */}
+      {/* <h3 className="collectionImage-description">{collectionImage.description}</h3> */}
       {/* <AddToAlbumButton
         className="add-to-album-button"
         albums={props.albums}
-        url={props.image.urls.regular}
-        description={props.image.alt_description}
+        url={props.collectionImage.urls.regular}
+        description={props.collectionImage.alt_description}
       /> */}
     </div>
   );

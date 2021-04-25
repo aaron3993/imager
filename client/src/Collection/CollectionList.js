@@ -5,24 +5,24 @@ import CollectionImageCard from "./CollectionImageCard";
 import "../Home/ImageList.css";
 
 const CollectionList = (props) => {
-  const [collection, setCollection] = useState([]);
+  const [collectionImages, setCollectionImages] = useState([]);
 
   useEffect(() => {
     async function getImages() {
       let res = await axios.get("http://localhost:8080/images");
-      setCollection(res.data);
+      setCollectionImages(res.data);
     }
 
     getImages();
   }, []);
 
-  const collectionList = collection.map((image) => {
+  const collectionList = collectionImages.map((collectionImage) => {
     return (
       <CollectionImageCard
-        key={image._id}
-        image={image}
-        collection={collection}
-        setCollection={setCollection}
+        key={collectionImage._id}
+        collectionImage={collectionImage}
+        collectionImages={collectionImages}
+        setCollectionImages={setCollectionImages}
       />
     );
   });
