@@ -7,6 +7,7 @@ import "../Home/ImageCard.css";
 
 const CollectionImageCard = (props) => {
   const image = props.image;
+  console.log(image);
 
   async function addToAlbum() {
     try {
@@ -17,10 +18,20 @@ const CollectionImageCard = (props) => {
     }
   }
 
+  async function removeImage() {
+    try {
+      await axios.delete(`http://localhost:8080/images/${image._id}`);
+      console.log("Delete request successful");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="image-card">
       <img src={image.url} alt={image.alt_description} />
       <button onClick={() => addToAlbum()}>Add</button>
+      <button onClick={() => removeImage()}>Delete</button>
       {/* <h3 className="image-description">{image.description}</h3> */}
       {/* <AddToAlbumButton
         className="add-to-album-button"

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Image from "../models/image.js";
 
 export const getImages = async (req, res) => {
@@ -25,4 +26,15 @@ export const addImage = async (req, res) => {
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
+};
+
+export const removeImage = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No iamge with that id");
+  await Image.findByIdAndRemove(id);
+
+  res.json({ message: "Image remove successfully" });
 };
