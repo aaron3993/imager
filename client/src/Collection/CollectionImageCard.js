@@ -6,7 +6,7 @@ import axios from "axios";
 import "../Home/ImageCard.css";
 
 const CollectionImageCard = (props) => {
-  const image = props.image;
+  const { image, collection, setCollection } = props;
   console.log(image);
 
   async function addToAlbum() {
@@ -21,7 +21,12 @@ const CollectionImageCard = (props) => {
   async function removeImage() {
     try {
       await axios.delete(`http://localhost:8080/images/${image._id}`);
-      console.log("Delete request successful");
+      const collectionToBeRemovedIndex = collection.findIndex(
+        (collectionImage) => collectionImage._id === image._id
+      );
+      const collectionCopy = [...collection];
+      collectionCopy.splice(collectionToBeRemovedIndex, 1);
+      setCollection(collectionCopy);
     } catch (err) {
       console.log(err);
     }
@@ -31,7 +36,7 @@ const CollectionImageCard = (props) => {
     <div className="image-card">
       <img src={image.url} alt={image.alt_description} />
       <button onClick={() => addToAlbum()}>Add</button>
-      <button onClick={() => removeImage()}>Delete</button>
+      <button onClick={() => removeImage()}>Remove</button>
       {/* <h3 className="image-description">{image.description}</h3> */}
       {/* <AddToAlbumButton
         className="add-to-album-button"

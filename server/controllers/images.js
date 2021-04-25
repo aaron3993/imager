@@ -30,7 +30,6 @@ export const addImage = async (req, res) => {
 
 export const removeImage = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No iamge with that id");

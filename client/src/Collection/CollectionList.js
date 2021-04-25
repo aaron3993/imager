@@ -17,7 +17,14 @@ const CollectionList = (props) => {
   }, []);
 
   const collectionList = collection.map((image) => {
-    return <CollectionImageCard key={image._id} image={image} />;
+    return (
+      <CollectionImageCard
+        key={image._id}
+        image={image}
+        collection={collection}
+        setCollection={setCollection}
+      />
+    );
   });
 
   return (
