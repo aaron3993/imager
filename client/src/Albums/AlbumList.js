@@ -7,7 +7,6 @@ import AlbumCard from "./AlbumCard";
 const AlbumList = (props) => {
   const { albums, setAlbums } = props;
   const [title, setTitle] = useState("");
-  const [albumCards, setAlbumCards] = useState([]);
 
   async function addAlbum() {
     try {
@@ -20,12 +19,12 @@ const AlbumList = (props) => {
     }
   }
 
-  const albumList = albums.map((album) => {
+  const albumList = albums.map((albumCard) => {
     return (
       <AlbumCard
-        key={album._id}
-        title={album.title}
-        album={album}
+        key={albumCard._id}
+        title={albumCard.title}
+        albumCard={albumCard}
         albums={albums}
         setAlbums={setAlbums}
       />

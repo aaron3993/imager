@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Album from "../models/album.js";
 
 export const getAlbums = async (req, res) => {
@@ -22,4 +23,15 @@ export const addAlbum = async (req, res) => {
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
+};
+
+export const deleteAlbum = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No album with that id");
+  await Album.findByIdAndRemove(id);
+
+  res.json({ message: "Image remove successfully" });
 };

@@ -6,28 +6,29 @@ import axios from "axios";
 // import "./ImageCard.css";
 
 const AlbumCard = (props) => {
-  const { title } = props;
-  //   async function addToCollection() {
-  //     try {
-  //       await axios.post("http://localhost:8080/images", image);
-  //       console.log("Post request successful");
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
+  const { albumCard, albums, setAlbums, title } = props;
+  console.log(albumCard._id);
+
+  async function deleteAlbum() {
+    try {
+      await axios.delete(`http://localhost:8080/albums/${albumCard._id}`);
+      console.log("deleting");
+      const albumToBeRemovedIndex = albums.findIndex(
+        (album) => album._id === albumCard._id
+      );
+      const albumsCopy = [...albums];
+      albumsCopy.splice(albumToBeRemovedIndex, 1);
+      setAlbums(albumsCopy);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="image-card">
       <h3>{title}</h3>
-      {/* <button onClick={() => addToAlbum()}>Add to Album</button> */}
-      {/* <button onClick={() => addToCollection()}>Add</button> */}
-      {/* <h3 className="image-description">{image.description}</h3> */}
-      {/* <AddToAlbumButton
-        className="add-to-album-button"
-        albums={props.albums}
-        url={props.image.urls.regular}
-        description={props.image.alt_description}
-      /> */}
+      {/* <button onClick={() => viewAlbum()}>View</button> */}
+      <button onClick={() => deleteAlbum()}>Delete</button>
     </div>
   );
 };
