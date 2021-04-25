@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Home from "./Home";
+import Home from "./Home/Home";
 import Collection from "./Collection";
 
 const App = () => {

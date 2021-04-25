@@ -7,7 +7,6 @@ export const getImages = async (req, res) => {
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
-  res.send("this works");
 };
 
 export const addImage = async (req, res) => {
