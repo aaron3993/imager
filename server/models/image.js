@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
 const imageSchema = mongoose.Schema({
-  title: String,
+  description: String,
+  url: String,
+  alt_description: String,
+  author: String,
   createdAt: {
     type: Date,
     default: new Date(),
