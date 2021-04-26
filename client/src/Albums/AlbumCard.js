@@ -12,7 +12,6 @@ const AlbumCard = (props) => {
   async function deleteAlbum() {
     try {
       await axios.delete(`http://localhost:8080/albums/${albumCard._id}`);
-      console.log("deleting");
       const albumToBeRemovedIndex = albums.findIndex(
         (album) => album._id === albumCard._id
       );

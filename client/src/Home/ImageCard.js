@@ -13,7 +13,6 @@ const ImageCard = (props) => {
   async function addToCollection() {
     try {
       await axios.post("http://localhost:8080/images", image);
-      console.log("Post request successful");
     } catch (err) {
       console.log(err);
     }
@@ -24,7 +23,6 @@ const ImageCard = (props) => {
       await axios.post(`http://localhost:8080/albums/${album._id}`, {
         image: image,
       });
-      console.log("Post request successful");
     } catch (err) {
       console.log(err);
     }
@@ -43,20 +41,13 @@ const ImageCard = (props) => {
       <Select
         options={options}
         value={option}
-        onChange={(e) => setOption(e.target.value)}
+        onChange={setOption}
         placeholder="Select an album"
       />
       <button onClick={() => addToAlbum(image.urls.regular, option)}>
         Add to Album
       </button>
       <button onClick={() => addToCollection()}>Add</button>
-      {/* <h3 className="image-description">{image.description}</h3> */}
-      {/* <AddToAlbumButton
-        className="add-to-album-button"
-        albums={props.albums}
-        url={props.image.urls.regular}
-        description={props.image.alt_description}
-      /> */}
     </div>
   );
 };
