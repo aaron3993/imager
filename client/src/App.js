@@ -19,10 +19,23 @@ const App = (props) => {
     getAlbums();
   }, []);
 
+  // async function addToAlbum(image, album) {
+  //   try {
+  //     await axios.post(`http://localhost:8080/albums/${album._id}`);
+  //     console.log("Post request successful");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact render={(props) => <Home {...props} />} />
+        <Route
+          path="/"
+          exact
+          render={(props) => <Home albums={albums} {...props} />}
+        />
         <Route
           path="/collection"
           exact

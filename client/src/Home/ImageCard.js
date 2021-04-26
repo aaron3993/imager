@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import axios from "axios";
 
@@ -8,6 +8,7 @@ import "./ImageCard.css";
 
 const ImageCard = (props) => {
   const { image, albums } = props;
+  const [option, setOption] = useState("");
 
   async function addToCollection() {
     try {
@@ -18,19 +19,36 @@ const ImageCard = (props) => {
     }
   }
 
-  const options = albums
-    ? albums.map((album) => {
-        return { value: album.name, label: album.name };
-      })
-    : null;
+  async function addToAlbum(image, album) {
+    try {
+      await axios.post(`http://localhost:8080/albums/${album._id}`, {
+        image: image,
+      });
+      console.log("Post request successful");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
+  const options = albums.map((album) => {
+    return { value: album.title, label: album.title };
+  });
+
+  console.log(options);
   return (
     <div className="image-card">
       <div className="card-image">
         <img src={image.urls.regular} alt={image.alt_description} />
       </div>
-      <Select options={options} placeholder="Select an album" />
-      {/* <button onClick={() => addToAlbum()}>Add to Album</button> */}
+      <Select
+        options={options}
+        value={option}
+        onChange={(e) => setOption(e.target.value)}
+        placeholder="Select an album"
+      />
+      <button onClick={() => addToAlbum(image.urls.regular, option)}>
+        Add to Album
+      </button>
       <button onClick={() => addToCollection()}>Add</button>
       {/* <h3 className="image-description">{image.description}</h3> */}
       {/* <AddToAlbumButton
