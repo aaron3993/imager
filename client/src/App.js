@@ -31,7 +31,9 @@ const App = (props) => {
         <Route
           path="/albums"
           exact
-          render={(props) => <AlbumList albums={albums} {...props} />}
+          render={(props) => (
+            <AlbumList albums={albums} setAlbums={setAlbums} {...props} />
+          )}
         />
       </Switch>
     </BrowserRouter>
