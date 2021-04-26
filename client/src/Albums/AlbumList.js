@@ -10,26 +10,28 @@ const AlbumList = (props) => {
 
   async function addAlbum() {
     try {
-      await axios.post("http://localhost:8080/albums", {
+      const res = await axios.post("http://localhost:8080/albums", {
         title: title,
       });
-      console.log("Post request successful");
+      setAlbums([...albums, res.data]);
     } catch (err) {
       console.log(err);
     }
   }
 
-  const albumList = albums.map((albumCard) => {
-    return (
-      <AlbumCard
-        key={albumCard._id}
-        title={albumCard.title}
-        albumCard={albumCard}
-        albums={albums}
-        setAlbums={setAlbums}
-      />
-    );
-  });
+  const albumList = albums
+    ? albums.map((albumCard) => {
+        return (
+          <AlbumCard
+            key={albumCard._id}
+            title={albumCard.title}
+            albumCard={albumCard}
+            albums={albums}
+            setAlbums={setAlbums}
+          />
+        );
+      })
+    : null;
 
   return (
     <div>
