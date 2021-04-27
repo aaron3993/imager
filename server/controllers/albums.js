@@ -12,7 +12,6 @@ export const getAlbums = async (req, res) => {
 
 export const addAlbum = async (req, res) => {
   const album = req.body;
-  console.log(album);
   const newAlbum = new Album({
     title: album.title,
   });
@@ -25,12 +24,35 @@ export const addAlbum = async (req, res) => {
   }
 };
 
+export const addToAlbum = async (req, res) => {
+  const { id } = req.params;
+  const { image } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No album with that id");
+
+  const album = await Album.findByIdAndUpdate(
+    id,
+    { $push: { images: image } },
+    { new: true }
+  );
+  console.log(album);
+  res.json(album);
+  // try {
+  //   await newAlbum.save();
+  //   res.status(201).json(newAlbum);
+  // } catch (err) {
+  //   res.status(409).json({ message: err.message });
+  // }
+};
+
 export const deleteAlbum = async (req, res) => {
   const { id } = req.params;
   console.log(id);
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No album with that id");
+
   await Album.findByIdAndRemove(id);
 
   res.json({ message: "Image remove successfully" });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import axios from "axios";
 
@@ -9,6 +9,11 @@ import "./ImageCard.css";
 const ImageCard = (props) => {
   const { image, albums } = props;
   const [option, setOption] = useState("");
+  const [selectedAlbum, setSelectedAlbum] = useState({});
+
+  useEffect(() => {
+    setSelectedAlbum(albums.find((album) => album.title === option.value));
+  }, [option]);
 
   async function addToCollection() {
     try {
@@ -18,9 +23,9 @@ const ImageCard = (props) => {
     }
   }
 
-  async function addToAlbum(image, album) {
+  async function addToAlbum(image, albumTitle) {
     try {
-      await axios.post(`http://localhost:8080/albums/${album._id}`, {
+      await axios.patch(`http://localhost:8080/albums/${selectedAlbum._id}`, {
         image: image,
       });
     } catch (err) {
@@ -44,7 +49,7 @@ const ImageCard = (props) => {
         onChange={setOption}
         placeholder="Select an album"
       />
-      <button onClick={() => addToAlbum(image.urls.regular, option)}>
+      <button onClick={() => addToAlbum(image.urls.regular, option.value)}>
         Add to Album
       </button>
       <button onClick={() => addToCollection()}>Add</button>
