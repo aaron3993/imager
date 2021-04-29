@@ -49,7 +49,7 @@ const App = (props) => {
           )}
         />
         <Route
-          path="/albums/:title"
+          path="/albums/:id"
           exact
           render={(props) => <AlbumView {...props} />}
         />

@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 router.get("/", getAlbums);
-router.get("/:title", viewAlbum);
+router.get("/:id", viewAlbum);
 router.post("/", addAlbum);
 router.patch("/:id", addToAlbum);
 router.delete("/:id", deleteAlbum);

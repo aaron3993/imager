@@ -7,11 +7,11 @@ import AlbumImageCard from "./AlbumImageCard";
 import "../Home/ImageList.css";
 
 const AlbumView = (props) => {
-  const { title } = useParams();
+  const { id } = useParams();
   const [images, setImages] = useState([]);
 
   useEffect(async () => {
-    const response = await axios.get(`http://localhost:8080/albums/${title}`);
+    const response = await axios.get(`http://localhost:8080/albums/${id}`);
     setImages(response.data);
   }, []);
 

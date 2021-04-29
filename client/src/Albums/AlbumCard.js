@@ -7,11 +7,11 @@ import axios from "axios";
 import "../Home/ImageCard.css";
 
 const AlbumCard = (props) => {
-  const { albumCard, albums, setAlbums, title } = props;
+  const { albumCard, albums, setAlbums } = props;
   let history = useHistory();
 
   function viewAlbum() {
-    history.push(`/albums/${albumCard.title}`);
+    history.push(`/albums/${albumCard._id}`);
   }
 
   async function deleteAlbum() {
@@ -30,7 +30,7 @@ const AlbumCard = (props) => {
 
   return (
     <div className="image-card">
-      <h3>{title}</h3>
+      <h3>{albumCard.title}</h3>
       <button onClick={() => viewAlbum()}>View</button>
       <button onClick={() => deleteAlbum()}>Delete</button>
     </div>

@@ -24,7 +24,6 @@ const AlbumList = (props) => {
         return (
           <AlbumCard
             key={albumCard._id}
-            title={albumCard.title}
             albumCard={albumCard}
             albums={albums}
             setAlbums={setAlbums}
