@@ -10,6 +10,16 @@ export const getAlbums = async (req, res) => {
   }
 };
 
+export const viewAlbum = async (req, res) => {
+  const { title } = req.params;
+  try {
+    const album = await Album.findOne({ title: title });
+    res.status(200).json(album.images);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
 export const addAlbum = async (req, res) => {
   const album = req.body;
   const newAlbum = new Album({

@@ -5,14 +5,15 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Home/Home";
 import CollectionList from "./Collection/CollectionList";
 import AlbumList from "./Albums/AlbumList";
+import AlbumView from "./Albums/AlbumView";
 
 const App = (props) => {
   const [albums, setAlbums] = useState([]);
+  const [albumImages, setAlbumImages] = useState([]);
 
   useEffect(() => {
     async function getAlbums() {
       let res = await axios.get("http://localhost:8080/albums");
-      console.log(res.data);
       setAlbums(res.data);
     }
 
@@ -45,8 +46,18 @@ const App = (props) => {
           path="/albums"
           exact
           render={(props) => (
-            <AlbumList albums={albums} setAlbums={setAlbums} {...props} />
+            <AlbumList
+              albums={albums}
+              setAlbums={setAlbums}
+              setAlbumImages={setAlbumImages}
+              {...props}
+            />
           )}
+        />
+        <Route
+          path="/album/:title"
+          exact
+          render={(props) => <AlbumView albumImages={albumImages} {...props} />}
         />
       </Switch>
     </BrowserRouter>
