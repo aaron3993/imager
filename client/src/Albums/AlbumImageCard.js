@@ -8,7 +8,9 @@ import axios from "axios";
 import "../Home/ImageCard.css";
 
 const AlbumImageCard = (props) => {
-  const { image, albums } = props;
+  const { image } = props;
+
+  function removeFromAlbum() {}
 
   // const [option, setOption] = useState("");
   // const [selectedAlbum, setSelectedAlbum] = useState({});
@@ -57,6 +59,7 @@ const AlbumImageCard = (props) => {
         Add to Album
       </button>
       <button onClick={() => addToCollection()}>Add</button> */}
+        <button onClick={() => removeFromAlbum()}>Remove From Album</button>
       </div>
     </div>
   );
