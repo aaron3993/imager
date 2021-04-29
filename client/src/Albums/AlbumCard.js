@@ -4,20 +4,14 @@ import axios from "axios";
 
 // import AddToAlbumButton from "./AddToAlbumButton";
 
-// import "./ImageCard.css";
+import "../Home/ImageCard.css";
 
 const AlbumCard = (props) => {
-  const { albumCard, albums, setAlbums, title, setAlbumImages } = props;
+  const { albumCard, albums, setAlbums, title } = props;
   let history = useHistory();
 
   function viewAlbum() {
     history.push(`/albums/${albumCard.title}`);
-    // const albumToBeRemovedIndex = albums.findIndex(
-    //   (album) => album._id === albumCard._id
-    // );
-    // const albumsCopy = [...albums];
-    // albumsCopy.splice(albumToBeRemovedIndex, 1);
-    // setAlbums(albumsCopy);
   }
 
   async function deleteAlbum() {

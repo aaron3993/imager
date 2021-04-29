@@ -43,7 +43,6 @@ const AlbumImageCard = (props) => {
   // console.log(options);
   return (
     <div>
-      <h1>Images</h1>
       <div className="image-card">
         <div className="card-image">
           <img src={image} alt={image} />

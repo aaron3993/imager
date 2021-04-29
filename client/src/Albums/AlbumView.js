@@ -20,6 +20,7 @@ const AlbumView = (props) => {
   });
   return (
     <div>
+      <h1>Images</h1>
       <div className="image-list">{imageList}</div>;
     </div>
   );
