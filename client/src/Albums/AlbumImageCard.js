@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import Select from "react-select";
 import axios from "axios";
 
@@ -8,10 +9,10 @@ import "../Home/ImageCard.css";
 
 const AlbumImageCard = (props) => {
   const { image, albums } = props;
-  console.log(history.state);
+
   // const [option, setOption] = useState("");
   // const [selectedAlbum, setSelectedAlbum] = useState({});
-  console.log(image);
+  // console.log(images);
 
   // useEffect(() => {
   //   setSelectedAlbum(albums.find((album) => album.title === option.value));

@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
 // import AddToAlbumButton from "./AddToAlbumButton";
@@ -10,25 +10,14 @@ const AlbumCard = (props) => {
   const { albumCard, albums, setAlbums, title, setAlbumImages } = props;
   let history = useHistory();
 
-  async function viewAlbum() {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/albums/${albumCard.title}`
-      );
-      setAlbumImages(response.data);
-      history.push({
-        pathname: `/albums/${albumCard.title}`,
-        state: { images: response.data },
-      });
-      // const albumToBeRemovedIndex = albums.findIndex(
-      //   (album) => album._id === albumCard._id
-      // );
-      // const albumsCopy = [...albums];
-      // albumsCopy.splice(albumToBeRemovedIndex, 1);
-      // setAlbums(albumsCopy);
-    } catch (err) {
-      console.log(err);
-    }
+  function viewAlbum() {
+    history.push(`/albums/${albumCard.title}`);
+    // const albumToBeRemovedIndex = albums.findIndex(
+    //   (album) => album._id === albumCard._id
+    // );
+    // const albumsCopy = [...albums];
+    // albumsCopy.splice(albumToBeRemovedIndex, 1);
+    // setAlbums(albumsCopy);
   }
 
   async function deleteAlbum() {

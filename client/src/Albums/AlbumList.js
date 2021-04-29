@@ -5,7 +5,7 @@ import AlbumCard from "./AlbumCard";
 // import "../Home/CardList.css";
 
 const AlbumList = (props) => {
-  const { albums, setAlbums, setAlbumImages } = props;
+  const { albums, setAlbums } = props;
   const [title, setTitle] = useState("");
 
   async function addAlbum() {
@@ -28,7 +28,6 @@ const AlbumList = (props) => {
             albumCard={albumCard}
             albums={albums}
             setAlbums={setAlbums}
-            setAlbumImages={setAlbumImages}
           />
         );
       })

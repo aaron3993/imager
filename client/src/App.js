@@ -9,7 +9,6 @@ import AlbumView from "./Albums/AlbumView";
 
 const App = (props) => {
   const [albums, setAlbums] = useState([]);
-  const [albumImages, setAlbumImages] = useState([]);
 
   useEffect(() => {
     async function getAlbums() {
@@ -46,18 +45,13 @@ const App = (props) => {
           path="/albums"
           exact
           render={(props) => (
-            <AlbumList
-              albums={albums}
-              setAlbums={setAlbums}
-              setAlbumImages={setAlbumImages}
-              {...props}
-            />
+            <AlbumList albums={albums} setAlbums={setAlbums} {...props} />
           )}
         />
         <Route
-          path="/album/:title"
+          path="/albums/:title"
           exact
-          render={(props) => <AlbumView albumImages={albumImages} {...props} />}
+          render={(props) => <AlbumView {...props} />}
         />
       </Switch>
     </BrowserRouter>

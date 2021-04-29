@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 import AlbumImageCard from "./AlbumImageCard";
 
-// import "../Home/ImageList.css";
+import "../Home/ImageList.css";
 
 const AlbumView = (props) => {
-  const { albumImages } = props;
-  console.log(albumImages);
-  const albumImageList = albumImages.map((image, i) => {
-    console.log(image);
+  const { title } = useParams();
+  const [images, setImages] = useState([]);
+
+  useEffect(async () => {
+    const response = await axios.get(`http://localhost:8080/albums/${title}`);
+    setImages(response.data);
+  }, []);
+
+  const imageList = images.map((image, i) => {
     return <AlbumImageCard image={image} />;
   });
-  return <div className="image-list">{albumImageList}</div>;
+  return (
+    <div>
+      <div className="image-list">{imageList}</div>;
+    </div>
+  );
 };
 
 export default AlbumView;
