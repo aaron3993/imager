@@ -8,15 +8,25 @@ import "../Home/ImageList.css";
 
 const AlbumView = (props) => {
   const { id } = useParams();
+  const [album, setAlbum] = useState({});
   const [images, setImages] = useState([]);
 
   useEffect(async () => {
     const response = await axios.get(`http://localhost:8080/albums/${id}`);
-    setImages(response.data);
+    setAlbum(response.data);
+    setImages(response.data.images);
   }, []);
 
   const imageList = images.map((image, i) => {
-    return <AlbumImageCard image={image} />;
+    return (
+      <AlbumImageCard
+        key={i}
+        image={image}
+        images={images}
+        setImages={setImages}
+        album={album}
+      />
+    );
   });
   return (
     <div>
