@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import axios from "axios";
 
 import ImageList from "./ImageList";
@@ -20,13 +21,32 @@ const Home = (props) => {
   };
 
   return (
-    <div>
-      <input
+    <div className="mt-3 d-flex flex-column align-items-center">
+      <FormGroup>
+        {/* <Label for="exampleEmail">Search Images</Label> */}
+        <Input
+          // className="w-25"
+          type="text"
+          placeholder="Search Images"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </FormGroup>
+      {/* <input
         placeholder="Search images..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-      />
-      <button onClick={() => searchImages(search)}>Search Images</button>
+      /> */}
+      {/* <button onClick={() => searchImages(search)}>Search Images</button> */}
+      <FormGroup>
+        <Button
+          color="primary"
+          type="submit"
+          onClick={() => searchImages(search)}
+        >
+          Search
+        </Button>
+      </FormGroup>
       <ImageList images={images} albums={albums} />
     </div>
   );
