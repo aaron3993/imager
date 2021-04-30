@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button, FormGroup, Input } from "reactstrap";
 import Select from "react-select";
 import axios from "axios";
 
@@ -43,16 +44,34 @@ const ImageCard = (props) => {
       <div className="card-image">
         <img src={image.urls.regular} alt={image.alt_description} />
       </div>
-      <Select
-        options={options}
-        value={option}
-        onChange={setOption}
-        placeholder="Select an album"
-      />
-      <button onClick={() => addToAlbum(image.urls.regular, option.value)}>
+      <div className="form">
+        <Select
+          options={options}
+          value={option}
+          onChange={setOption}
+          placeholder="Select an album"
+        />
+        <Button
+          className="p-0 w-75"
+          color="primary"
+          type="submit"
+          onClick={() => addToAlbum(image.urls.regular, option.value)}
+        >
+          Add to Album
+        </Button>
+        {/* <button onClick={() => addToAlbum(image.urls.regular, option.value)}>
         Add to Album
-      </button>
-      <button onClick={() => addToCollection()}>Add</button>
+      </button> */}
+        <Button
+          className="p-0 mt-1 w-75"
+          color="primary"
+          type="submit"
+          onClick={() => addToCollection()}
+        >
+          Save to Collection
+        </Button>
+        {/* <button onClick={() => addToCollection()}>Save to Collection</button> */}
+      </div>
     </div>
   );
 };
