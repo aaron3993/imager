@@ -40,7 +40,13 @@ export const addToAlbum = async (req, res) => {
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No album with that id");
-
+  const currentAlbum = await Album.findById(id);
+  console.log(currentAlbum.model);
+  console.log(currentAlbum.schema.obj.images[0]);
+  // const imageExists = await Album.find({ image: image });
+  // console.log(imageExists);
+  // if (imageExists) return res.send("This image already exists in this album.");
+  // console.log(imageExists);
   const album = await Album.findByIdAndUpdate(
     id,
     { $push: { images: image } },
