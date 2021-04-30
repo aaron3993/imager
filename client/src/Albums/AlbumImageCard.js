@@ -16,14 +16,12 @@ const AlbumImageCard = (props) => {
       axios.post(`http://localhost:8080/albums/${album._id}/images`, {
         image: image,
       });
-      console.log("image removed");
-      // const imageToBeRemoved = images.findIndex(
-      //   (imageCard) => image === imageCard
-      // );
-      // console.log(imageToBeRemoved);
-      // const imagesCopy = [...images];
-      // imagesCopy.splice(imageToBeRemoved, 1);
-      // setImages(imagesCopy);
+      const imageToBeRemovedIndex = images.findIndex(
+        (imageCard) => image === imageCard
+      );
+      const imagesCopy = [...images];
+      imagesCopy.splice(imageToBeRemovedIndex, 1);
+      setImages(imagesCopy);
     } catch (err) {
       console.log(err);
     }
