@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import NavBar from "./Navbar";
 import Home from "./Home/Home";
 import CollectionList from "./Collection/CollectionList";
 import AlbumList from "./Albums/AlbumList";
@@ -29,32 +30,35 @@ const App = (props) => {
   // }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route
-          path="/"
-          exact
-          render={(props) => <Home albums={albums} {...props} />}
-        />
-        <Route
-          path="/collection"
-          exact
-          render={(props) => <CollectionList {...props} />}
-        />
-        <Route
-          path="/albums"
-          exact
-          render={(props) => (
-            <AlbumList albums={albums} setAlbums={setAlbums} {...props} />
-          )}
-        />
-        <Route
-          path="/albums/:id"
-          exact
-          render={(props) => <AlbumView {...props} />}
-        />
-      </Switch>
-    </BrowserRouter>
+    <>
+      <NavBar />
+      <BrowserRouter>
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={(props) => <Home albums={albums} {...props} />}
+          />
+          <Route
+            path="/collection"
+            exact
+            render={(props) => <CollectionList {...props} />}
+          />
+          <Route
+            path="/albums"
+            exact
+            render={(props) => (
+              <AlbumList albums={albums} setAlbums={setAlbums} {...props} />
+            )}
+          />
+          <Route
+            path="/albums/:id"
+            exact
+            render={(props) => <AlbumView {...props} />}
+          />
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 };
 
