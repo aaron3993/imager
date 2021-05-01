@@ -39,6 +39,11 @@ const Home = (props) => {
           Search
         </Button>
       </FormGroup>
+      {/* {!images.length ? (
+        <Welcome />
+      ) : (
+        <ImageList images={images} albums={albums} />
+      )} */}
       <ImageList images={images} albums={albums} />
     </div>
   );

@@ -5,7 +5,7 @@ import Image from "../models/image.js";
 export const getAlbums = async (req, res) => {
   try {
     const albums = await Album.find();
-    res.status(200).json(albums);
+    if (albums) res.status(200).json(albums);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

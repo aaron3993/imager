@@ -8,7 +8,7 @@ const ImageList = (props) => {
   const imageList = images.map((image) => {
     return <ImageCard key={image.id} image={image} albums={albums} />;
   });
-  return <div className="image-list">{imageList}</div>;
+  return <ul className="image-list">{imageList}</ul>;
 };
 
 export default ImageList;

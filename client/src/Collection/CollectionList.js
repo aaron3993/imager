@@ -29,7 +29,7 @@ const CollectionList = (props) => {
 
   return (
     <div>
-      <ul>{collectionList}</ul>
+      <ul className="image-list">{collectionList}</ul>
     </div>
   );
 };

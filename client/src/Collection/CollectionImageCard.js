@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
 // import AddToAlbumButton from "./AddToAlbumButton";
@@ -16,9 +17,11 @@ const CollectionImageCard = (props) => {
     }
   }
 
-  async function removeImage() {
+  async function removeFromAlbum() {
     try {
-      await axios.delete(`http://localhost:8080/images/${collectionImage._id}`);
+      await axios.patch(
+        `http://localhost:8080/images/album/${collectionImage._id}`
+      );
       const collectionToBeRemovedIndex = collectionImages.findIndex(
         (image) => image._id === collectionImage._id
       );
@@ -32,9 +35,18 @@ const CollectionImageCard = (props) => {
 
   return (
     <div className="image-card">
-      <img src={collectionImage.url} alt={collectionImage.alt_description} />
+      <div className="card-image">
+        <img src={collectionImage.url} alt={collectionImage.alt_description} />
+      </div>
       <button onClick={() => addToAlbum()}>Add</button>
-      <button onClick={() => removeImage()}>Remove</button>
+      <Button
+        className="p-0 mt-1 w-75"
+        color="primary"
+        type="submit"
+        onClick={() => removeFromAlbum()}
+      >
+        Remove From Album
+      </Button>
     </div>
   );
 };
