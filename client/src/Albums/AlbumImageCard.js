@@ -9,13 +9,10 @@ import "../Home/ImageCard.css";
 
 const AlbumImageCard = (props) => {
   const { image, images, setImages, album } = props;
-
+  console.log({ image });
   function removeFromAlbum() {
-    // localhost
     try {
-      axios.post(`http://localhost:8080/albums/${album._id}/images`, {
-        image: image,
-      });
+      axios.patch(`http://localhost:8080/images/${image._id}`, image);
       const imageToBeRemovedIndex = images.findIndex(
         (imageCard) => image === imageCard
       );

@@ -43,25 +43,27 @@ export const addToAlbum = async (req, res) => {
   console.log(image);
   if (!mongoose.Types.ObjectId.isValid(album._id))
     return res.status(404).send("No album with that id");
-  // const imageExists = await Album.find({ image: image });
-  // console.log(imageExists);
-  // if (imageExists) return res.send("This image already exists in this album.");
-  // console.log(imageExists);
-  const newImage = new Image({
-    album_id: album._id,
-    url: image,
+  try {
+    const newImage = new Image({
+      album_id: album._id,
+      url: image,
+    });
+    await newImage.save();
+    res.json(album);
+  } catch (err) {
+    res.status(409).json({ message: err.message });
+  }
+};
+
+export const removeFromAlbum = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No image with that id");
+
+  const updatedImage = await Image.findByIdAndUpdate(id, {
+    album_id: null,
+    // $set: { album_id: null },
   });
-  // const album = await Album.findByIdAndUpdate(
-  //   album._id,
-  //   { $push: { images: image } },
-  //   { new: true }
-  // );
-  await newImage.save();
-  res.json(album);
-  // try {
-  //   await newAlbum.save();
-  //   res.status(201).json(newAlbum);
-  // } catch (err) {
-  //   res.status(409).json({ message: err.message });
-  // }
+  res.json(updatedImage);
 };
