@@ -47,6 +47,7 @@ const ImageCard = (props) => {
       </div>
       <div className="form">
         <Select
+          className="w-75"
           options={options}
           value={option}
           onChange={setOption}
