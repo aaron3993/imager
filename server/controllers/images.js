@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Image from "../models/image.js";
 
-export const getImages = async (req, res) => {
+export const getCollection = async (req, res) => {
   try {
     const images = await Image.find();
     res.status(200).json(images);
@@ -10,7 +10,7 @@ export const getImages = async (req, res) => {
   }
 };
 
-export const addImage = async (req, res) => {
+export const addToCollection = async (req, res) => {
   const image = req.body;
   const newImage = new Image({
     description: image.description,
@@ -28,7 +28,7 @@ export const addImage = async (req, res) => {
   }
 };
 
-export const removeImage = async (req, res) => {
+export const removeFromCollection = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id))

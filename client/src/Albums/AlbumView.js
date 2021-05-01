@@ -13,8 +13,6 @@ const AlbumView = (props) => {
 
   useEffect(async () => {
     const response = await axios.get(`http://localhost:8080/albums/${id}`);
-    // setAlbum(response.data);
-    console.log(response.data);
     setImages(response.data);
   }, []);
 

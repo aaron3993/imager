@@ -12,7 +12,7 @@ const AlbumImageCard = (props) => {
   console.log({ image });
   function removeFromAlbum() {
     try {
-      axios.patch(`http://localhost:8080/images/${image._id}`, image);
+      axios.patch(`http://localhost:8080/images/album/${image._id}`, image);
       const imageToBeRemovedIndex = images.findIndex(
         (imageCard) => image === imageCard
       );

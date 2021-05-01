@@ -1,19 +1,19 @@
 import express from "express";
 
 import {
-  getImages,
-  addImage,
-  removeImage,
+  getCollection,
+  addToCollection,
+  removeFromCollection,
   addToAlbum,
   removeFromAlbum,
 } from "../controllers/images.js";
 
 const router = express.Router();
 
-router.get("/", getImages);
-router.post("/", addImage);
-router.post("/add/album", addToAlbum);
-router.delete("/:id", removeImage);
-router.patch("/:id", removeFromAlbum);
+router.get("/collection", getCollection);
+router.post("/collection", addToCollection);
+router.post("/album", addToAlbum);
+router.delete("/collection/:id", removeFromCollection);
+router.patch("/album/:id", removeFromAlbum);
 
 export default router;

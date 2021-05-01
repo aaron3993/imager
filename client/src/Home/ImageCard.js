@@ -18,7 +18,7 @@ const ImageCard = (props) => {
 
   async function addToCollection() {
     try {
-      await axios.post("http://localhost:8080/images", image);
+      await axios.post("http://localhost:8080/images/collection", image);
     } catch (err) {
       console.log(err);
     }
@@ -26,8 +26,7 @@ const ImageCard = (props) => {
 
   async function addToAlbum(image, albumTitle) {
     try {
-      // await axios.patch(`http://localhost:8080/albums/${selectedAlbum._id}`, {
-      await axios.post(`http://localhost:8080/images/add/album`, {
+      await axios.post(`http://localhost:8080/images/album`, {
         album: selectedAlbum,
         image: image,
       });

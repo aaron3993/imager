@@ -8,12 +8,12 @@ const CollectionList = (props) => {
   const [collectionImages, setCollectionImages] = useState([]);
 
   useEffect(() => {
-    async function getImages() {
-      let res = await axios.get("http://localhost:8080/images");
+    async function getCollection() {
+      let res = await axios.get("http://localhost:8080/images/collection");
       setCollectionImages(res.data);
     }
 
-    getImages();
+    getCollection();
   }, []);
 
   const collectionList = collectionImages.map((collectionImage) => {
