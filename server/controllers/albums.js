@@ -18,7 +18,7 @@ export const viewAlbum = async (req, res) => {
     .catch((err) => res.status(400).json(err));
 };
 
-export const addAlbum = async (req, res) => {
+export const createAlbum = async (req, res) => {
   const album = req.body;
   const newAlbum = new Album({
     title: album.title,

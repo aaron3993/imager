@@ -4,16 +4,16 @@ import Image from "../models/image.js";
 export const getCollection = async (req, res) => {
   try {
     const images = await Image.find();
-    // const uniqueImagesArray = [];
-    // const uniqueImagesObject = {};
-    // for (let image of images) {
-    //   if (!uniqueImagesObject[image.url]) {
-    //     uniqueImagesObject[image.url] = 1;
-    //     uniqueImagesArray.push(image);
-    //   }
-    // }
-    // res.status(200).json(uniqueImagesArray);
-    res.status(200).json(images);
+    const uniqueImagesArray = [];
+    const uniqueImagesObject = {};
+    for (let image of images) {
+      if (!uniqueImagesObject[image.url]) {
+        uniqueImagesObject[image.url] = 1;
+        uniqueImagesArray.push(image);
+      }
+    }
+    res.status(200).json(uniqueImagesArray);
+    // res.status(200).json(images);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

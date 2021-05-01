@@ -17,7 +17,7 @@ const CollectionImageCard = (props) => {
     }
   }
 
-  async function removeFromAlbum() {
+  async function removeFromCollection() {
     try {
       await axios.patch(
         `http://localhost:8080/images/collection/${collectionImage._id}`
@@ -43,9 +43,9 @@ const CollectionImageCard = (props) => {
         className="p-0 mt-1 w-75"
         color="primary"
         type="submit"
-        onClick={() => removeFromAlbum()}
+        onClick={() => removeFromCollection()}
       >
-        Remove From Album
+        Delete
       </Button>
     </div>
   );

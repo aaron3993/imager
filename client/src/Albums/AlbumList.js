@@ -10,7 +10,7 @@ const AlbumList = (props) => {
   const { albums, setAlbums } = props;
   const [title, setTitle] = useState("");
 
-  async function addAlbum() {
+  async function createAlbum() {
     try {
       const res = await axios.post("http://localhost:8080/albums", {
         title: title,
@@ -40,14 +40,18 @@ const AlbumList = (props) => {
       <FormGroup>
         <Input
           type="text"
-          placeholder="Add a new album"
+          placeholder="Create a new album"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
       </FormGroup>
       <FormGroup>
-        <Button color="primary" type="submit" onClick={() => addAlbum(title)}>
-          Add
+        <Button
+          color="primary"
+          type="submit"
+          onClick={() => createAlbum(title)}
+        >
+          Create
         </Button>
       </FormGroup>
       <div>

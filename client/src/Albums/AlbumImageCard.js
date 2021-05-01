@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button, FormGroup, Input } from "reactstrap";
 
 import Select from "react-select";
 import axios from "axios";
@@ -71,7 +72,15 @@ const AlbumImageCard = (props) => {
         Add to Album
       </button>
       <button onClick={() => addToCollection()}>Add</button> */}
-        <button onClick={() => removeFromAlbum()}>Remove From Album</button>
+        {/* <button onClick={() => removeFromAlbum()}>Remove From Album</button> */}
+        <Button
+          className="p-0 mt-1 w-75"
+          color="primary"
+          type="submit"
+          onClick={() => removeFromAlbum()}
+        >
+          Remove From Album
+        </Button>
       </div>
     </div>
   );
