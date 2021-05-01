@@ -2,8 +2,20 @@ import mongoose from "mongoose";
 import Image from "../models/image.js";
 
 export const getCollection = async (req, res) => {
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
   try {
     const images = await Image.find();
+    // console.log(images);
+    const unique = [...new Set(images.map((image) => image[image.url]))];
+    console.log(unique);
+    // const uniqueImages = unique.map((image) => unique[image]);
+    // var uniqueImages = images.filter(obj => {
+    //   return obj.b === 6
+    // })
+    // console.log(uniqueImages);
     res.status(200).json(images);
   } catch (err) {
     res.status(404).json({ message: err.message });
