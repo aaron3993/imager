@@ -20,7 +20,7 @@ const CollectionImageCard = (props) => {
   async function removeFromAlbum() {
     try {
       await axios.patch(
-        `http://localhost:8080/images/album/${collectionImage._id}`
+        `http://localhost:8080/images/collection/${collectionImage._id}`
       );
       const collectionToBeRemovedIndex = collectionImages.findIndex(
         (image) => image._id === collectionImage._id

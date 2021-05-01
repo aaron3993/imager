@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Button, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
 import AlbumCard from "./AlbumCard";
+import "../Home/ImageList.css";
 // import "../Home/CardList.css";
 
 const AlbumList = (props) => {
@@ -33,13 +35,24 @@ const AlbumList = (props) => {
     : null;
 
   return (
-    <div>
-      <h1>Albums</h1>
-      <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      <button onClick={() => addAlbum(title)}>Add Album</button>
+    <div className="mt-3 d-flex flex-column align-items-center">
+      {/* <h1>Albums</h1> */}
+      <FormGroup>
+        <Input
+          type="text"
+          placeholder="Add a new album"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Button color="primary" type="submit" onClick={() => addAlbum(title)}>
+          Add
+        </Button>
+      </FormGroup>
       <div>
         {albums.length ? (
-          <ul>{albumList}</ul>
+          <ul className="image-list">{albumList}</ul>
         ) : (
           <p>You do not have any albums.</p>
         )}
