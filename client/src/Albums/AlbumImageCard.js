@@ -62,7 +62,7 @@ const AlbumImageCard = (props) => {
     <div>
       <div className="image-card">
         <div className="card-image">
-          <img src={image} alt={image} />
+          <img src={image.url} alt={image} />
         </div>
         {/* <Select
         options={options}
