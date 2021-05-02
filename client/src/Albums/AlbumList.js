@@ -7,7 +7,7 @@ import "../Home/ImageList.css";
 // import "../Home/CardList.css";
 
 const AlbumList = (props) => {
-  const { images, setImages, albums, setAlbums } = props;
+  const { images, setImages, albums, setAlbums, loading } = props;
   const [title, setTitle] = useState("");
 
   async function createAlbum() {
@@ -60,13 +60,15 @@ const AlbumList = (props) => {
           Create
         </Button>
       </FormGroup>
-      <div>
-        {albums.length ? (
-          <ul className="image-list">{albumList}</ul>
-        ) : (
-          <p>You do not have any albums.</p>
-        )}
-      </div>
+      {!loading ? (
+        <div>
+          {albums.length ? (
+            <ul className="image-list">{albumList}</ul>
+          ) : (
+            <p>You do not have any albums.</p>
+          )}
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -13,7 +13,6 @@ export const getCollection = async (req, res) => {
       }
     }
     res.status(200).json(uniqueImagesArray);
-    // res.status(200).json(images);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -85,8 +84,9 @@ export const addToAlbum = async (req, res) => {
       await newImage.save();
       res.status(201).json(newImage);
     } else {
-      console.log("This image has already been added");
-      res.send({ message: "This image has already been added" });
+      res.send({
+        message: "This image has already been added to the selected album",
+      });
     }
   } catch (err) {
     res.status(409).json({ message: err.message });

@@ -12,13 +12,19 @@ const AlbumView = (props) => {
   const { images, setImages } = props;
 
   useEffect(async () => {
-    const response = await axios.get(
-      `http://localhost:8080/albums/${id}/images`
-    );
-    setImages(response.data);
+    async function getAlbum() {
+      const response = await axios.get(
+        `http://localhost:8080/albums/${id}/images`
+      );
+      setImages(response.data);
 
-    const albumResponse = await axios.get(`http://localhost:8080/albums/${id}`);
-    setAlbum(albumResponse.data);
+      const albumResponse = await axios.get(
+        `http://localhost:8080/albums/${id}`
+      );
+      setAlbum(albumResponse.data);
+    }
+
+    getAlbum();
   }, []);
 
   const imageList = images.map((image, i) => {

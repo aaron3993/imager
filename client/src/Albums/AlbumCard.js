@@ -12,18 +12,19 @@ const AlbumCard = (props) => {
   // const [images, setImages] = useState([]);
   let history = useHistory();
 
-  useEffect(() => {
-    async function getAlbumImages() {
-      const response = await axios.get(
-        `http://localhost:8080/albums/${albumCard._id}`
-      );
-      setImages(response.data);
-    }
+  // useEffect(() => {
+  //   async function getAlbumImages() {
+  //     const response = await axios.get(
+  //       `http://localhost:8080/albums/${albumCard._id}/images`
+  //     );
+  //     console.log(response.data);
+  //     setImages(response.data);
+  //   }
 
-    getAlbumImages();
-  }, []);
+  //   getAlbumImages();
+  // }, []);
 
-  console.log(images);
+  console.log(images[0]);
   function viewAlbum() {
     history.push(`/albums/${albumCard._id}`);
   }
