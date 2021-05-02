@@ -16,6 +16,10 @@ const CollectionImageCard = (props) => {
   } = props;
   const [option, setOption] = useState("");
   const [selectedAlbum, setSelectedAlbum] = useState({});
+  const [validAlbum, setValidAlbum] = useState(false);
+  const [validAlbumMsg, setValidAlbumMsg] = useState("");
+  const [invalidAlbum, setInvalidAlbum] = useState(false);
+  const [invalidAlbumMsg, setInvalidAlbumMsg] = useState("");
 
   useEffect(() => {
     setSelectedAlbum(albums.find((album) => album.title === option.value));
@@ -31,10 +35,25 @@ const CollectionImageCard = (props) => {
 
   async function addToAlbum(image) {
     try {
-      await axios.post(`http://localhost:8080/images/album`, {
+      const res = await axios.post(`http://localhost:8080/images/album`, {
         album: selectedAlbum,
         image: image,
       });
+      if (res.data.invalid) {
+        setValidAlbum(false);
+        setInvalidAlbum(true);
+        setInvalidAlbumMsg(res.data.invalid);
+        setTimeout(() => {
+          setInvalidAlbum(false);
+        }, 2000);
+      } else {
+        setInvalidAlbum(false);
+        setValidAlbum(true);
+        setValidAlbumMsg(res.data.valid);
+        setTimeout(() => {
+          setValidAlbum(false);
+        }, 2000);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -81,6 +100,8 @@ const CollectionImageCard = (props) => {
       >
         Add
       </Button>
+      {validAlbum ? <span className="valid">{validAlbumMsg}</span> : null}
+      {invalidAlbum ? <span className="invalid">{invalidAlbumMsg}</span> : null}
       <Button
         className="p-1 mt-1 w-75"
         color="primary"

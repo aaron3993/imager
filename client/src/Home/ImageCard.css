@@ -33,3 +33,13 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.valid {
+  color: green;
+  font-size: 0.75rem;
+}
+
+.invalid {
+  color: red;
+  font-size: 0.75rem;
+}

@@ -17,6 +17,8 @@ const ImageCard = (props) => {
   const [invalidAlbumMsg, setInvalidAlbumMsg] = useState("");
   const [validCollection, setValidCollection] = useState(false);
   const [validCollectionMsg, setValidCollectionMsg] = useState("");
+  const [invalidCollection, setInvalidCollection] = useState(false);
+  const [invalidCollectionMsg, setInvalidCollectionMsg] = useState("");
 
   useEffect(() => {
     setSelectedAlbum(albums.find((album) => album.title === option.value));
@@ -28,26 +30,21 @@ const ImageCard = (props) => {
         "http://localhost:8080/images/collection",
         image
       );
-      setValidCollection(true);
-      setValidCollectionMsg(res.data.message);
-      setTimeout(() => {
+      if (res.data.invalid) {
         setValidCollection(false);
-      }, 2000);
-      // if (res.data.valid) {
-      //   setValidAlbum(false);
-      //   setInvalidAlbum(true);
-      //   setInvalidAlbumMsg(res.data.invalid);
-      //   setTimeout(() => {
-      //     setInvalidAlbum(false);
-      //   }, 2000);
-      // } else {
-      //   setInvalidAlbum(false);
-      //   setValidAlbum(true);
-      //   setValidAlbumMsg(res.data.valid);
-      //   setTimeout(() => {
-      //     setValidAlbum(false);
-      //   }, 2000);
-      // }
+        setInvalidCollection(true);
+        setInvalidCollectionMsg(res.data.invalid);
+        setTimeout(() => {
+          setInvalidCollection(false);
+        }, 2000);
+      } else {
+        setInvalidCollection(false);
+        setValidCollection(true);
+        setValidCollectionMsg(res.data.valid);
+        setTimeout(() => {
+          setValidCollection(false);
+        }, 2000);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -88,7 +85,6 @@ const ImageCard = (props) => {
       <div className="card-image">
         <img src={image.urls.regular} alt={image.alt_description} />
       </div>
-      {/* <div className="form"> */}
       <Select
         className="w-75"
         options={options}
@@ -104,11 +100,8 @@ const ImageCard = (props) => {
       >
         Add to Album
       </Button>
-      {invalidAlbum ? <span>{invalidAlbumMsg}</span> : null}
-      {validAlbum ? <span>{validAlbumMsg}</span> : null}
-      {/* <button onClick={() => addToAlbum(image.urls.regular, option.value)}>
-        Add to Album
-      </button> */}
+      {validAlbum ? <span className="valid">{validAlbumMsg}</span> : null}
+      {invalidAlbum ? <span className="invalid">{invalidAlbumMsg}</span> : null}
       <Button
         className="p-1 mt-1 w-75"
         color="primary"
@@ -117,9 +110,12 @@ const ImageCard = (props) => {
       >
         Save to Collection
       </Button>
-      {validCollection ? <span>{validCollectionMsg}</span> : null}
-      {/* <button onClick={() => addToCollection()}>Save to Collection</button> */}
-      {/* </div> */}
+      {validCollection ? (
+        <span className="valid">{validCollectionMsg}</span>
+      ) : null}
+      {invalidCollection ? (
+        <span className="invalid">{invalidCollectionMsg}</span>
+      ) : null}
     </div>
   );
 };
