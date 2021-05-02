@@ -12,10 +12,12 @@ const AlbumView = (props) => {
   const [images, setImages] = useState([]);
 
   useEffect(async () => {
-    const response = await axios.get(`http://localhost:8080/albums/${id}`);
+    const response = await axios.get(
+      `http://localhost:8080/albums/${id}/images`
+    );
     setImages(response.data);
   }, []);
-
+  console.log(album);
   const imageList = images.map((image, i) => {
     return (
       <AlbumImageCard
@@ -29,7 +31,7 @@ const AlbumView = (props) => {
   });
   return (
     <div>
-      <h1>Images</h1>
+      <h1>{album.title}</h1>
       <div className="image-list">{imageList}</div>
     </div>
   );

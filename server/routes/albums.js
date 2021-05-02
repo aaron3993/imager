@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/", getAlbums);
-router.get("/:id", viewAlbum);
+router.get("/:id/images", viewAlbum);
 router.post("/", createAlbum);
 router.delete("/:id", deleteAlbum);
 
