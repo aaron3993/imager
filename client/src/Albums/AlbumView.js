@@ -8,8 +8,9 @@ import "../Home/ImageList.css";
 
 const AlbumView = (props) => {
   const { id } = useParams();
-  const [album, setAlbum] = useState({});
   const { images, setImages } = props;
+  const [album, setAlbum] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
     const response = await axios.get(
@@ -19,6 +20,8 @@ const AlbumView = (props) => {
 
     const albumResponse = await axios.get(`http://localhost:8080/albums/${id}`);
     setAlbum(albumResponse.data);
+
+    setLoading(false);
   }, []);
 
   const imageList = images.map((image, i) => {
@@ -32,6 +35,11 @@ const AlbumView = (props) => {
       />
     );
   });
+
+  if (loading) {
+    return null;
+  }
+
   return (
     <div className="text-center mt-3">
       <h1>{album.title}</h1>
