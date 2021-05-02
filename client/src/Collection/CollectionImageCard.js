@@ -59,7 +59,7 @@ const CollectionImageCard = (props) => {
   const options = albums.map((album) => {
     return { value: album.title, label: album.title };
   });
-
+  console.log(collectionImage);
   return (
     <div className="image-card">
       <div className="card-image">
@@ -73,9 +73,14 @@ const CollectionImageCard = (props) => {
         onChange={setOption}
         placeholder="Select an album"
       />
-      <button onClick={() => addToAlbum(collectionImage.urls.regular)}>
+      <Button
+        className="p-1 mt-1 w-75"
+        color="primary"
+        type="submit"
+        onClick={() => addToAlbum(collectionImage.url)}
+      >
         Add
-      </button>
+      </Button>
       <Button
         className="p-1 mt-1 w-75"
         color="primary"
