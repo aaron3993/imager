@@ -40,7 +40,7 @@ const AlbumList = (props) => {
 
   return (
     <div className="mt-3 d-flex flex-column align-items-center">
-      {/* <h1>Albums</h1> */}
+      <h1>Albums</h1>
       <FormGroup>
         <Input
           type="text"

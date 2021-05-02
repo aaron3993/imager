@@ -74,12 +74,12 @@ const AlbumImageCard = (props) => {
       <button onClick={() => addToCollection()}>Add</button> */}
         {/* <button onClick={() => removeFromAlbum()}>Remove From Album</button> */}
         <Button
-          className="p-0 mt-1 w-75"
+          className="p-0 mt-1 w-50"
           color="primary"
           type="submit"
           onClick={() => removeFromAlbum()}
         >
-          Remove From Album
+          Remove
         </Button>
       </div>
     </div>

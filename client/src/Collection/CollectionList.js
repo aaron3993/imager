@@ -28,7 +28,8 @@ const CollectionList = (props) => {
   });
 
   return (
-    <div>
+    <div className="text-center mt-3">
+      <h1>Collection</h1>
       <ul className="image-list">{collectionList}</ul>
     </div>
   );
