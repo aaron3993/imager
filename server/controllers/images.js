@@ -32,14 +32,14 @@ export const addToCollection = async (req, res) => {
   }
 
   try {
-    const newImage = new Image({
-      description: image.description,
-      url: currentUrl,
-      alt_description: image.urls.alt_description,
-      likes: image.likes,
-      author: image.user.links.name,
-    });
     if (!uniqueImagesObject[currentUrl]) {
+      const newImage = new Image({
+        description: image.description,
+        url: currentUrl,
+        alt_description: image.urls.alt_description,
+        likes: image.likes,
+        author: image.user.links.name,
+      });
       await newImage.save();
       res.status(201).json(newImage);
     } else {
@@ -74,21 +74,19 @@ export const addToAlbum = async (req, res) => {
       uniqueImagesObject[image] = 1;
     }
   }
+
   try {
-    const newImage = new Image({
-      album_id: album._id,
-      url: image,
-    });
     if (!uniqueImagesObject[image]) {
+      const newImage = new Image({
+        album_id: album._id,
+        url: image,
+      });
       await newImage.save();
       res.status(201).json(newImage);
     } else {
       console.log("This image has already been added");
       res.send({ message: "This image has already been added" });
     }
-
-    // await newImage.save();
-    // res.json(album);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
