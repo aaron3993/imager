@@ -20,11 +20,20 @@ export const viewAlbum = async (req, res) => {
 
 export const createAlbum = async (req, res) => {
   const album = req.body;
-  const newAlbum = new Album({
-    title: album.title,
-  });
+  const existingAlbum = await Album.findOne({ title: album.title });
+  if (album.title.length < 3) {
+    return res.json({
+      message: "Please enter at least 3 characters for the title.",
+    });
+  }
+  if (existingAlbum) {
+    return res.json({ message: "An album with this title already exists!" });
+  }
 
   try {
+    const newAlbum = new Album({
+      title: album.title,
+    });
     await newAlbum.save();
     res.status(201).json(newAlbum);
   } catch (err) {

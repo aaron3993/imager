@@ -15,7 +15,11 @@ const AlbumList = (props) => {
       const res = await axios.post("http://localhost:8080/albums", {
         title: title,
       });
-      setAlbums([...albums, res.data]);
+      if (res.data.message) {
+        console.log(res.data.message);
+      } else {
+        setAlbums([...albums, res.data]);
+      }
     } catch (err) {
       console.log(err);
     }
