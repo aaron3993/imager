@@ -41,8 +41,11 @@ export const addToCollection = async (req, res) => {
     });
     if (!uniqueImagesObject[currentUrl]) {
       await newImage.save();
+      res.status(201).json(newImage);
+    } else {
+      console.log("This image has already been added");
+      res.send({ message: "This image has already been added" });
     }
-    res.status(201).json(newImage);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
@@ -63,13 +66,29 @@ export const addToAlbum = async (req, res) => {
 
   if (!mongoose.Types.ObjectId.isValid(album._id))
     return res.status(404).send("No album with that id");
+
+  const images = await Image.find({ album_id: album._id });
+  const uniqueImagesObject = {};
+  for (let eachImage of images) {
+    if (eachImage.url === image) {
+      uniqueImagesObject[image] = 1;
+    }
+  }
   try {
     const newImage = new Image({
       album_id: album._id,
       url: image,
     });
-    await newImage.save();
-    res.json(album);
+    if (!uniqueImagesObject[image]) {
+      await newImage.save();
+      res.status(201).json(newImage);
+    } else {
+      console.log("This image has already been added");
+      res.send({ message: "This image has already been added" });
+    }
+
+    // await newImage.save();
+    // res.json(album);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
