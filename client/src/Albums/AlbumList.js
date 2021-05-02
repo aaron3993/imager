@@ -9,6 +9,8 @@ import "../Home/ImageList.css";
 const AlbumList = (props) => {
   const { images, setImages, albums, setAlbums } = props;
   const [title, setTitle] = useState("");
+  const [valid, setValid] = useState(false);
+  const [validMsg, setValidMsg] = useState("");
   const [invalid, setInvalid] = useState(false);
   const [invalidMsg, setInvalidMsg] = useState("");
 
@@ -17,14 +19,20 @@ const AlbumList = (props) => {
       const res = await axios.post("http://localhost:8080/albums", {
         title: title,
       });
-      if (res.data.message) {
+      if (res.data.invalid) {
+        setValid(false);
         setInvalid(true);
-        setInvalidMsg(res.data.message);
+        setInvalidMsg(res.data.invalid);
         setTimeout(() => {
           setInvalid(false);
         }, 2000);
       } else {
         setInvalid(false);
+        setValid(true);
+        setValidMsg(res.data.valid);
+        setTimeout(() => {
+          setValid(false);
+        }, 2000);
         setAlbums([...albums, res.data]);
       }
     } catch (err) {
@@ -67,7 +75,8 @@ const AlbumList = (props) => {
           Create
         </Button>
       </FormGroup>
-      {invalid ? <span>{invalidMsg}</span> : null}
+      {valid ? <span className="valid">{validMsg}</span> : null}
+      {invalid ? <span className="invalid">{invalidMsg}</span> : null}
       <div>
         {albums.length ? (
           <ul className="image-list">{albumList}</ul>
