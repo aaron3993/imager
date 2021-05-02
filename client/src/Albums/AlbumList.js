@@ -20,6 +20,9 @@ const AlbumList = (props) => {
       if (res.data.message) {
         setInvalid(true);
         setInvalidMsg(res.data.message);
+        setTimeout(() => {
+          setInvalid(false);
+        }, 2000);
       } else {
         setInvalid(false);
         setAlbums([...albums, res.data]);

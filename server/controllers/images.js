@@ -64,7 +64,8 @@ export const removeFromCollection = async (req, res) => {
 export const addToAlbum = async (req, res) => {
   const { album, image } = req.body;
 
-  if (!album) return res.status(404).send("No album was selected");
+  if (!album) return res.send({ invalid: "No album was selected." });
+
   if (!mongoose.Types.ObjectId.isValid(album._id))
     return res.status(404).send("No album with that id");
 
@@ -83,10 +84,11 @@ export const addToAlbum = async (req, res) => {
         url: image,
       });
       await newImage.save();
-      res.status(201).json(newImage);
+      res.send({ valid: `Image added to '${album.title}'!` });
     } else {
-      console.log("This image has already been added");
-      res.send({ message: "This image has already been added" });
+      res.send({
+        invalid: "The selected album already contains this image.",
+      });
     }
   } catch (err) {
     res.status(409).json({ message: err.message });
