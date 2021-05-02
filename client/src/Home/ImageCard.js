@@ -15,6 +15,8 @@ const ImageCard = (props) => {
   const [validAlbumMsg, setValidAlbumMsg] = useState("");
   const [invalidAlbum, setInvalidAlbum] = useState(false);
   const [invalidAlbumMsg, setInvalidAlbumMsg] = useState("");
+  const [validCollection, setValidCollection] = useState(false);
+  const [validCollectionMsg, setValidCollectionMsg] = useState("");
 
   useEffect(() => {
     setSelectedAlbum(albums.find((album) => album.title === option.value));
@@ -22,7 +24,30 @@ const ImageCard = (props) => {
 
   async function addToCollection() {
     try {
-      await axios.post("http://localhost:8080/images/collection", image);
+      const res = await axios.post(
+        "http://localhost:8080/images/collection",
+        image
+      );
+      setValidCollection(true);
+      setValidCollectionMsg(res.data.message);
+      setTimeout(() => {
+        setValidCollection(false);
+      }, 2000);
+      // if (res.data.valid) {
+      //   setValidAlbum(false);
+      //   setInvalidAlbum(true);
+      //   setInvalidAlbumMsg(res.data.invalid);
+      //   setTimeout(() => {
+      //     setInvalidAlbum(false);
+      //   }, 2000);
+      // } else {
+      //   setInvalidAlbum(false);
+      //   setValidAlbum(true);
+      //   setValidAlbumMsg(res.data.valid);
+      //   setTimeout(() => {
+      //     setValidAlbum(false);
+      //   }, 2000);
+      // }
     } catch (err) {
       console.log(err);
     }
@@ -92,6 +117,7 @@ const ImageCard = (props) => {
       >
         Save to Collection
       </Button>
+      {validCollection ? <span>{validCollectionMsg}</span> : null}
       {/* <button onClick={() => addToCollection()}>Save to Collection</button> */}
       {/* </div> */}
     </div>

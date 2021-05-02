@@ -41,9 +41,8 @@ export const addToCollection = async (req, res) => {
         author: image.user.links.name,
       });
       await newImage.save();
-      res.status(201).json(newImage);
+      res.send({ message: "Image added to collection!" });
     } else {
-      console.log("This image has already been added");
       res.send({ message: "This image has already been added" });
     }
   } catch (err) {
