@@ -29,12 +29,12 @@ const AlbumList = (props) => {
       } else {
         setInvalid(false);
         setValid(true);
-        setValidMsg(res.data.valid);
+        setValidMsg(`'${res.data.title}' has been successfully created!`);
         setTimeout(() => {
           setValid(false);
         }, 2000);
-        setAlbums([...albums, res.data]);
       }
+      setAlbums([...albums, res.data]);
     } catch (err) {
       console.log(err);
     }
@@ -77,13 +77,14 @@ const AlbumList = (props) => {
       </FormGroup>
       {valid ? <span className="valid">{validMsg}</span> : null}
       {invalid ? <span className="invalid">{invalidMsg}</span> : null}
-      <div>
+      <ul className="image-list">{albumList}</ul>
+      {/* <div>
         {albums.length ? (
           <ul className="image-list">{albumList}</ul>
         ) : (
           <p>You do not have any albums.</p>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

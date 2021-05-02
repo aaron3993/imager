@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const imageSchema = mongoose.Schema({
-  album_id: String,
+  album_id: Array,
   description: String,
   url: String,
   alt_description: String,
