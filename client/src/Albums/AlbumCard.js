@@ -9,6 +9,7 @@ import "../Home/ImageCard.css";
 
 const AlbumCard = (props) => {
   const { images, setImages, albumCard, albums, setAlbums } = props;
+  const [loading, setLoading] = useState(true);
   let history = useHistory();
 
   useEffect(() => {
@@ -17,6 +18,7 @@ const AlbumCard = (props) => {
         `http://localhost:8080/albums/${albumCard._id}`
       );
       setImages(response.data);
+      setLoading(false);
     }
 
     getAlbumImages();
@@ -44,7 +46,7 @@ const AlbumCard = (props) => {
     <div className="image-card">
       <h3>{albumCard.title}</h3>
       <div className="card-image">
-        {images[0] ? (
+        {loading ? null : images[0] ? (
           <img src={images[0].url} alt={images[0].url} />
         ) : (
           <div className="p-3 bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
@@ -52,8 +54,8 @@ const AlbumCard = (props) => {
           </div>
         )}
       </div>
+
       <div className="form">
-        {/* <FormGroup> */}
         <Button
           className="mt-1 w-75"
           color="primary"
@@ -62,8 +64,6 @@ const AlbumCard = (props) => {
         >
           View
         </Button>
-        {/* </FormGroup> */}
-        {/* <FormGroup> */}
         <Button
           className="w-75"
           color="primary"
@@ -72,7 +72,6 @@ const AlbumCard = (props) => {
         >
           Delete
         </Button>
-        {/* </FormGroup> */}
       </div>
     </div>
   );
