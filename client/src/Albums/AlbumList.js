@@ -9,6 +9,8 @@ import "../Home/ImageList.css";
 const AlbumList = (props) => {
   const { images, setImages, albums, setAlbums } = props;
   const [title, setTitle] = useState("");
+  const [invalid, setInvalid] = useState(false);
+  const [invalidMsg, setInvalidMsg] = useState("");
 
   async function createAlbum() {
     try {
@@ -16,8 +18,10 @@ const AlbumList = (props) => {
         title: title,
       });
       if (res.data.message) {
-        console.log(res.data.message);
+        setInvalid(true);
+        setInvalidMsg(res.data.message);
       } else {
+        setInvalid(false);
         setAlbums([...albums, res.data]);
       }
     } catch (err) {
@@ -60,6 +64,7 @@ const AlbumList = (props) => {
           Create
         </Button>
       </FormGroup>
+      {invalid ? <span>{invalidMsg}</span> : null}
       <div>
         {albums.length ? (
           <ul className="image-list">{albumList}</ul>

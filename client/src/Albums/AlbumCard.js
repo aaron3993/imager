@@ -11,16 +11,16 @@ const AlbumCard = (props) => {
   const { images, setImages, albumCard, albums, setAlbums } = props;
   let history = useHistory();
 
-  // useEffect(() => {
-  //   async function getAlbumImages() {
-  //     const response = await axios.get(
-  //       `http://localhost:8080/albums/${albumCard._id}`
-  //     );
-  //     setImages(response.data);
-  //   }
+  useEffect(() => {
+    async function getAlbumImages() {
+      const response = await axios.get(
+        `http://localhost:8080/albums/${albumCard._id}`
+      );
+      setImages(response.data);
+    }
 
-  //   getAlbumImages();
-  // }, []);
+    getAlbumImages();
+  }, []);
 
   function viewAlbum() {
     history.push(`/albums/${albumCard._id}`);
