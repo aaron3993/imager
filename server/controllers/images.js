@@ -64,6 +64,7 @@ export const removeFromCollection = async (req, res) => {
 export const addToAlbum = async (req, res) => {
   const { album, image } = req.body;
 
+  if (!album) return res.status(404).send("No album was selected");
   if (!mongoose.Types.ObjectId.isValid(album._id))
     return res.status(404).send("No album with that id");
 
@@ -98,9 +99,5 @@ export const removeFromAlbum = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No image with that id");
 
-  const updatedImage = await Image.findByIdAndUpdate(id, {
-    album_id: null,
-    // $set: { album_id: null },
-  });
-  res.json(updatedImage);
+  await Image.findByIdAndRemove(id);
 };

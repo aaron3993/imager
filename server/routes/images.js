@@ -14,6 +14,6 @@ router.get("/collection", getCollection);
 router.post("/collection", addToCollection);
 router.post("/album", addToAlbum);
 router.patch("/collection/:id", removeFromCollection);
-router.patch("/album/:id", removeFromAlbum);
+router.delete("/album/:id", removeFromAlbum);
 
 export default router;

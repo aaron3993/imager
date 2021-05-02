@@ -7,7 +7,7 @@ import "../Home/ImageList.css";
 // import "../Home/CardList.css";
 
 const AlbumList = (props) => {
-  const { albums, setAlbums } = props;
+  const { images, setImages, albums, setAlbums } = props;
   const [title, setTitle] = useState("");
 
   async function createAlbum() {
@@ -30,6 +30,8 @@ const AlbumList = (props) => {
         return (
           <AlbumCard
             key={albumCard._id}
+            images={images}
+            setImages={setImages}
             albumCard={albumCard}
             albums={albums}
             setAlbums={setAlbums}

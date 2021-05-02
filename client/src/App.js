@@ -11,6 +11,7 @@ import AlbumView from "./Albums/AlbumView";
 import "bootstrap/dist/css/bootstrap.css";
 
 const App = (props) => {
+  const [images, setImages] = useState([]);
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
@@ -50,13 +51,21 @@ const App = (props) => {
             path="/albums"
             exact
             render={(props) => (
-              <AlbumList albums={albums} setAlbums={setAlbums} {...props} />
+              <AlbumList
+                albums={albums}
+                setAlbums={setAlbums}
+                images={images}
+                setImages={setImages}
+                {...props}
+              />
             )}
           />
           <Route
             path="/albums/:id"
             exact
-            render={(props) => <AlbumView {...props} />}
+            render={(props) => (
+              <AlbumView images={images} setImages={setImages} {...props} />
+            )}
           />
         </Switch>
       </BrowserRouter>

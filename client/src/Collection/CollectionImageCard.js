@@ -59,7 +59,7 @@ const CollectionImageCard = (props) => {
   const options = albums.map((album) => {
     return { value: album.title, label: album.title };
   });
-  console.log(collectionImage);
+
   return (
     <div className="image-card">
       <div className="card-image">

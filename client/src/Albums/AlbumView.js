@@ -9,7 +9,7 @@ import "../Home/ImageList.css";
 const AlbumView = (props) => {
   const { id } = useParams();
   const [album, setAlbum] = useState({});
-  const [images, setImages] = useState([]);
+  const { images, setImages } = props;
 
   useEffect(async () => {
     const response = await axios.get(

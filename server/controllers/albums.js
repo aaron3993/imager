@@ -10,12 +10,12 @@ export const getAlbums = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
-export const getAlbum = async (req, res) => {
+export const getAlbumImages = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const album = await Album.findById(id);
-    res.status(200).json(album);
+    const images = await Image.find({ album_id: id });
+    res.status(200).json(images);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

@@ -8,17 +8,22 @@ import axios from "axios";
 import "../Home/ImageCard.css";
 
 const AlbumCard = (props) => {
-  const { albumCard, albums, setAlbums } = props;
-  const [images, setImages] = useState([]);
+  const { images, setImages, albumCard, albums, setAlbums } = props;
+  // const [images, setImages] = useState([]);
   let history = useHistory();
 
-  // useEffect(async () => {
-  //   const response = await axios.get(
-  //     `http://localhost:8080/albums/${albumCard._id}`
-  //   );
-  //   setImages(response.data);
-  // }, []);
+  useEffect(() => {
+    async function getAlbumImages() {
+      const response = await axios.get(
+        `http://localhost:8080/albums/${albumCard._id}`
+      );
+      setImages(response.data);
+    }
 
+    getAlbumImages();
+  }, []);
+
+  console.log(images);
   function viewAlbum() {
     history.push(`/albums/${albumCard._id}`);
   }
@@ -40,27 +45,33 @@ const AlbumCard = (props) => {
   return (
     <div className="image-card">
       <h3>{albumCard.title}</h3>
-      <div className="card-image w-100">
-        <div className="bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
-          <p>Your album is empty, add some images!</p>
-        </div>
-        {/* {images ? (
-          <img
-            src={images ? images[0].url : null}
-            alt={images ? images[0].url : null}
-          />
+      <div className="card-image">
+        {images[0] ? (
+          <img src={images[0].url} alt={images[0].url} />
         ) : (
-          <div></div>
-        )} */}
+          <div className="p-3 bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
+            <p>Your album is empty, add some images!</p>
+          </div>
+        )}
       </div>
       <div className="form">
         {/* <FormGroup> */}
-        <Button color="primary" type="submit" onClick={() => viewAlbum()}>
+        <Button
+          className="mt-1 w-75"
+          color="primary"
+          type="submit"
+          onClick={() => viewAlbum()}
+        >
           View
         </Button>
         {/* </FormGroup> */}
         {/* <FormGroup> */}
-        <Button color="primary" type="submit" onClick={() => deleteAlbum()}>
+        <Button
+          className="w-75"
+          color="primary"
+          type="submit"
+          onClick={() => deleteAlbum()}
+        >
           Delete
         </Button>
         {/* </FormGroup> */}
