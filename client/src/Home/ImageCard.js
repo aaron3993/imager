@@ -39,7 +39,6 @@ const ImageCard = (props) => {
     return { value: album.title, label: album.title };
   });
 
-  console.log(options);
   return (
     <div className="image-card">
       <div className="card-image">
@@ -54,7 +53,7 @@ const ImageCard = (props) => {
           placeholder="Select an album"
         />
         <Button
-          className="p-0 w-75"
+          className="p-1 w-75"
           color="primary"
           type="submit"
           onClick={() => addToAlbum(image.urls.regular, option.value)}
@@ -65,7 +64,7 @@ const ImageCard = (props) => {
         Add to Album
       </button> */}
         <Button
-          className="p-0 mt-1 w-75"
+          className="p-1 mt-1 w-75"
           color="primary"
           type="submit"
           onClick={() => addToCollection()}

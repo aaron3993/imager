@@ -60,7 +60,7 @@ export const removeFromCollection = async (req, res) => {
 
 export const addToAlbum = async (req, res) => {
   const { album, image } = req.body;
-  console.log(image);
+
   if (!mongoose.Types.ObjectId.isValid(album._id))
     return res.status(404).send("No album with that id");
   try {

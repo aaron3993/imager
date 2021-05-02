@@ -33,7 +33,7 @@ const AlbumView = (props) => {
     );
   });
   return (
-    <div>
+    <div className="text-center mt-3">
       <h1>{album.title}</h1>
       <div className="image-list">{imageList}</div>
     </div>

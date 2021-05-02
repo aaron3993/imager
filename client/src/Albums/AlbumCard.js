@@ -19,7 +19,6 @@ const AlbumCard = (props) => {
   //   setImages(response.data);
   // }, []);
 
-  console.log(images);
   function viewAlbum() {
     history.push(`/albums/${albumCard._id}`);
   }

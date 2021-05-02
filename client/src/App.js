@@ -44,7 +44,7 @@ const App = (props) => {
           <Route
             path="/collection"
             exact
-            render={(props) => <CollectionList {...props} />}
+            render={(props) => <CollectionList albums={albums} {...props} />}
           />
           <Route
             path="/albums"

@@ -5,6 +5,7 @@ import CollectionImageCard from "./CollectionImageCard";
 import "../Home/ImageList.css";
 
 const CollectionList = (props) => {
+  const { albums } = props;
   const [collectionImages, setCollectionImages] = useState([]);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const CollectionList = (props) => {
     return (
       <CollectionImageCard
         key={collectionImage._id}
+        albums={albums}
         collectionImage={collectionImage}
         collectionImages={collectionImages}
         setCollectionImages={setCollectionImages}
