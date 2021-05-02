@@ -16,8 +16,11 @@ const AlbumView = (props) => {
       `http://localhost:8080/albums/${id}/images`
     );
     setImages(response.data);
+
+    const albumResponse = await axios.get(`http://localhost:8080/albums/${id}`);
+    setAlbum(albumResponse.data);
   }, []);
-  console.log(album);
+
   const imageList = images.map((image, i) => {
     return (
       <AlbumImageCard
