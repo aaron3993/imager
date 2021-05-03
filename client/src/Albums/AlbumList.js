@@ -34,7 +34,9 @@ const AlbumList = (props) => {
           setValid(false);
         }, 2000);
       }
-      setAlbums([...albums, res.data]);
+      if (res.data.newAlbum) {
+        setAlbums([...albums, res.data.newAlbum]);
+      }
     } catch (err) {
       console.log(err);
     }

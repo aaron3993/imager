@@ -45,7 +45,7 @@ export const createAlbum = async (req, res) => {
       title: album.title,
     });
     await newAlbum.save();
-    res.send(newAlbum);
+    res.send({ newAlbum: newAlbum });
     // res.send({ valid: `'${newAlbum.title}' has been successfully created!` });
   } catch (err) {
     res.status(409).json({ message: err.message });
