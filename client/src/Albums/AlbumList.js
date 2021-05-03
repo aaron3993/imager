@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, FormGroup, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
 import AlbumCard from "./AlbumCard";
@@ -14,7 +14,8 @@ const AlbumList = (props) => {
   const [invalid, setInvalid] = useState(false);
   const [invalidMsg, setInvalidMsg] = useState("");
 
-  async function createAlbum() {
+  async function createAlbum(e) {
+    e.preventDefault();
     try {
       const res = await axios.post("http://localhost:8080/albums", {
         title: title,
@@ -29,7 +30,9 @@ const AlbumList = (props) => {
       } else {
         setInvalid(false);
         setValid(true);
-        setValidMsg(`'${res.data.title}' has been successfully created!`);
+        setValidMsg(
+          `'${res.data.newAlbum.title}' has been successfully created!`
+        );
         setTimeout(() => {
           setValid(false);
         }, 2000);
@@ -58,27 +61,28 @@ const AlbumList = (props) => {
     : null;
 
   return (
-    <div className="mt-3 d-flex flex-column align-items-center">
+    <div className="mt-3 text-center">
       <h1>Albums</h1>
-      <FormGroup>
-        <Input
-          type="text"
-          placeholder="Create a new album"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Button
-          color="primary"
-          type="submit"
-          onClick={() => createAlbum(title)}
-        >
-          Create
-        </Button>
-      </FormGroup>
-      {valid ? <span className="valid">{validMsg}</span> : null}
-      {invalid ? <span className="invalid">{invalidMsg}</span> : null}
+      <Form
+        className="d-flex flex-column align-items-center"
+        onSubmit={(e) => createAlbum(e)}
+      >
+        <FormGroup>
+          <Input
+            type="text"
+            placeholder="Create a new album"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Button color="primary" type="submit">
+            Create
+          </Button>
+        </FormGroup>
+        {valid ? <span className="valid">{validMsg}</span> : null}
+        {invalid ? <span className="invalid">{invalidMsg}</span> : null}
+      </Form>
       <ul className="image-list">{albumList}</ul>
       {/* <div>
         {albums.length ? (
