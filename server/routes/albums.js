@@ -4,15 +4,15 @@ import {
   getAlbumImages,
   getAlbums,
   createAlbum,
-  viewAlbum,
+  getAlbum,
   deleteAlbum,
 } from "../controllers/albums.js";
 
 const router = express.Router();
 
 router.get("/", getAlbums);
-router.get("/:id", getAlbumImages);
-router.get("/:id/images", viewAlbum);
+router.get("/:id", getAlbum);
+router.get("/:id/images", getAlbumImages);
 router.post("/", createAlbum);
 router.delete("/:id", deleteAlbum);
 

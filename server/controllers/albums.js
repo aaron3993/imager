@@ -21,9 +21,9 @@ export const getAlbumImages = async (req, res) => {
   }
 };
 
-export const viewAlbum = async (req, res) => {
+export const getAlbum = async (req, res) => {
   const { id } = req.params;
-  Image.find({ album_id: id })
+  Album.findById(id)
     .then((all) => res.status(200).json(all))
     .catch((err) => res.status(400).json(err));
 };

@@ -19,6 +19,7 @@ const AlbumView = (props) => {
     setImages(response.data);
 
     const albumResponse = await axios.get(`http://localhost:8080/albums/${id}`);
+    console.log(albumResponse.data);
     setAlbum(albumResponse.data);
 
     setLoading(false);
@@ -39,10 +40,10 @@ const AlbumView = (props) => {
   if (loading) {
     return null;
   }
-
+  console.log(album);
   return (
     <div className="text-center mt-3">
-      <h1>{album.title}</h1>
+      <h1>{album.title}f</h1>
       <div className="image-list">{imageList}</div>
     </div>
   );

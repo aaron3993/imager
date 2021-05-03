@@ -15,7 +15,7 @@ const AlbumCard = (props) => {
   useEffect(() => {
     async function getAlbumImages() {
       const response = await axios.get(
-        `http://localhost:8080/albums/${albumCard._id}`
+        `http://localhost:8080/albums/${albumCard._id}/images`
       );
       setImages(response.data);
       setLoading(false);
@@ -24,7 +24,7 @@ const AlbumCard = (props) => {
     getAlbumImages();
   }, []);
 
-  function viewAlbum() {
+  function getAlbumImages() {
     history.push(`/albums/${albumCard._id}`);
   }
 
@@ -60,7 +60,7 @@ const AlbumCard = (props) => {
           className="mt-1 w-75"
           color="primary"
           type="submit"
-          onClick={() => viewAlbum()}
+          onClick={() => getAlbumImages()}
         >
           View
         </Button>
