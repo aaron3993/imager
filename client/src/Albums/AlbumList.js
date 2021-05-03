@@ -4,6 +4,7 @@ import axios from "axios";
 
 import AlbumCard from "./AlbumCard";
 import "../Home/ImageList.css";
+import "../Home/Home.css";
 // import "../Home/CardList.css";
 
 const AlbumList = (props) => {
@@ -61,12 +62,9 @@ const AlbumList = (props) => {
     : null;
 
   return (
-    <div className="mt-3 text-center">
-      <h1>Albums</h1>
-      <Form
-        className="d-flex flex-column align-items-center"
-        onSubmit={(e) => createAlbum(e)}
-      >
+    <div>
+      <Form className="heading" onSubmit={(e) => createAlbum(e)}>
+        <h1 className="mt-3">Albums</h1>
         <FormGroup>
           <Input
             type="text"

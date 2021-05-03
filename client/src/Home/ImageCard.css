@@ -5,7 +5,7 @@
   align-items: center;
   border: solid black 2px;
   border-radius: 5%;
-  background-color: #c7c7c7;
+  background-color: #c2eff2;
   width: 25rem;
   height: 25rem;
   margin: 0.5rem;
@@ -42,4 +42,8 @@
 .invalid {
   color: red;
   font-size: 0.75rem;
+}
+
+.image-card:hover {
+  border: solid black 3px;
 }

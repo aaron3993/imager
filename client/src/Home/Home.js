@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
 import ImageList from "./ImageList";
+import "./Home.css";
 
 const Home = (props) => {
   const { albums } = props;
@@ -22,10 +23,8 @@ const Home = (props) => {
 
   return (
     <div>
-      <Form
-        className="mt-3 d-flex flex-column align-items-center"
-        onSubmit={(e) => searchImages(e, search)}
-      >
+      <Form className="heading" onSubmit={(e) => searchImages(e, search)}>
+        <h1 className="mt-3 text-center">Imager</h1>
         <FormGroup>
           <Input
             type="text"

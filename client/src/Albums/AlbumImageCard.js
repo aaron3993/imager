@@ -46,7 +46,7 @@ const AlbumImageCard = (props) => {
           type="submit"
           onClick={() => removeFromAlbum()}
         >
-          Remove
+          Remove Image
         </Button>
       </div>
     </div>

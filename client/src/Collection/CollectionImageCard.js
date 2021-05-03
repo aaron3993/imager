@@ -98,7 +98,7 @@ const CollectionImageCard = (props) => {
         type="submit"
         onClick={() => addToAlbum(collectionImage.url)}
       >
-        Add
+        Add to Album
       </Button>
       {validAlbum ? <span className="valid">{validAlbumMsg}</span> : null}
       {invalidAlbum ? <span className="invalid">{invalidAlbumMsg}</span> : null}
@@ -108,7 +108,7 @@ const CollectionImageCard = (props) => {
         type="submit"
         onClick={() => removeFromCollection()}
       >
-        Delete
+        Delete Image
       </Button>
     </div>
   );

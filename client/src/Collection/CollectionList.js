@@ -3,6 +3,7 @@ import axios from "axios";
 
 import CollectionImageCard from "./CollectionImageCard";
 import "../Home/ImageList.css";
+import "../Home/Home.css";
 
 const CollectionList = (props) => {
   const { albums } = props;
@@ -30,8 +31,10 @@ const CollectionList = (props) => {
   });
 
   return (
-    <div className="text-center mt-3">
-      <h1>Collection</h1>
+    <div className="text-center">
+      <div className="heading">
+        <h1 className="mt-3 mb-3">Collection</h1>
+      </div>
       <ul className="image-list">{collectionList}</ul>
     </div>
   );

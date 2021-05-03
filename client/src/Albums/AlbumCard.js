@@ -62,7 +62,7 @@ const AlbumCard = (props) => {
           type="submit"
           onClick={() => getAlbumImages()}
         >
-          View
+          View Images
         </Button>
         <Button
           className="w-75"
@@ -70,7 +70,7 @@ const AlbumCard = (props) => {
           type="submit"
           onClick={() => deleteAlbum()}
         >
-          Delete
+          Delete Album
         </Button>
       </div>
     </div>
