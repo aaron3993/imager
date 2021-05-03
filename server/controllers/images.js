@@ -75,7 +75,7 @@ export const addToAlbum = async (req, res) => {
     if (!currentImage) {
       // Create the image
       const newImage = new Image({
-        $push: { album_id: album._id },
+        album_id: album._id,
         url: image,
       });
       await newImage.save();
