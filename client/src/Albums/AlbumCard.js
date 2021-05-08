@@ -11,7 +11,7 @@ const AlbumCard = (props) => {
   const { images, setImages, albumCard, albums, setAlbums } = props;
   const [loading, setLoading] = useState(true);
   let history = useHistory();
-
+  console.log(images);
   useEffect(() => {
     async function getAlbumImages() {
       const response = await axios.get(
@@ -23,10 +23,6 @@ const AlbumCard = (props) => {
 
     getAlbumImages();
   }, []);
-
-  function getAlbumImages() {
-    history.push(`/albums/${albumCard._id}`);
-  }
 
   async function deleteAlbum() {
     try {
@@ -50,7 +46,7 @@ const AlbumCard = (props) => {
           <img
             src={images[0].url}
             alt={images[0].url}
-            onClick={() => getAlbumImages()}
+            onClick={() => history.push(`/albums/${albumCard._id}`)}
           />
         ) : (
           <div className="p-3 bg-dark h-100 w-100 text-light d-flex flex-column justify-content-center align-items-center">
@@ -69,7 +65,7 @@ const AlbumCard = (props) => {
           className="mt-1 w-75"
           color="primary"
           type="submit"
-          onClick={() => getAlbumImages()}
+          onClick={() => history.push(`/albums/${albumCard._id}`)}
         >
           View Images
         </Button>

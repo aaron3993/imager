@@ -8,7 +8,7 @@ import "../Home/Home.css";
 // import "../Home/CardList.css";
 
 const AlbumList = (props) => {
-  const { images, setImages, albums, setAlbums, loading, setLoading } = props;
+  const { images, setImages, albums, setAlbums, loading } = props;
   const [title, setTitle] = useState("");
   const [valid, setValid] = useState(false);
   const [validMsg, setValidMsg] = useState("");
