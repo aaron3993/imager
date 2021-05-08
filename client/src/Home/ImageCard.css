@@ -37,12 +37,12 @@
 
 .valid {
   color: green;
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 .invalid {
   color: red;
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 .image-card:hover {

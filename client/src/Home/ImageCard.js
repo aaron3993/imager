@@ -104,7 +104,12 @@ const ImageCard = (props) => {
       >
         Add to Album
       </Button>
-      {validAlbum ? <span className="valid">{validAlbumMsg}</span> : null}
+      {validAlbum ? (
+        <span className="valid">
+          {validAlbumMsg}{" "}
+          <a href={`/albums/${selectedAlbum._id}`}>Go to album</a>
+        </span>
+      ) : null}
       {invalidAlbum ? <span className="invalid">{invalidAlbumMsg}</span> : null}
       <Button
         className="p-1 mt-1 w-75"
@@ -115,7 +120,9 @@ const ImageCard = (props) => {
         Save to Collection
       </Button>
       {validCollection ? (
-        <span className="valid">{validCollectionMsg}</span>
+        <span className="valid">
+          {validCollectionMsg} <a href="/collection">Go to collection</a>
+        </span>
       ) : null}
       {invalidCollection ? (
         <span className="invalid">{invalidCollectionMsg}</span>

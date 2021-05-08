@@ -26,14 +26,6 @@ const CollectionImageCard = (props) => {
     setSelectedAlbum(albums.find((album) => album.title === option.value));
   }, [option]);
 
-  // async function addToAlbum() {
-  //   try {
-  //     await axios.post("http://localhost:8080/albums", collectionImage);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-  console.log(collectionImage);
   async function addToAlbum() {
     try {
       const res = await axios.post(`http://localhost:8080/images/album`, {
@@ -105,7 +97,12 @@ const CollectionImageCard = (props) => {
       >
         Add to Album
       </Button>
-      {validAlbum ? <span className="valid">{validAlbumMsg}</span> : null}
+      {validAlbum ? (
+        <span className="valid">
+          {validAlbumMsg}{" "}
+          <a href={`/albums/${selectedAlbum._id}`}>Go to album</a>
+        </span>
+      ) : null}
       {invalidAlbum ? <span className="invalid">{invalidAlbumMsg}</span> : null}
       <Button
         className="p-1 mt-1 w-75"

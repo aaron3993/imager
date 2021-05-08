@@ -28,6 +28,7 @@ const Home = (props) => {
         <h1 className="mt-3 text-center">Imager</h1>
         <FormGroup>
           <Input
+            autoFocus={true}
             type="text"
             placeholder="Search Images"
             value={search}
