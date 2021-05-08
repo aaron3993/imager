@@ -3,8 +3,7 @@ import { Button, FormGroup, Input } from "reactstrap";
 import Select from "react-select";
 import axios from "axios";
 
-// import AddToAlbumButton from "./AddToAlbumButton";
-
+import ImageModal from "../ImageModal";
 import "./ImageCard.css";
 
 const ImageCard = (props) => {
@@ -19,6 +18,8 @@ const ImageCard = (props) => {
   const [validCollectionMsg, setValidCollectionMsg] = useState("");
   const [invalidCollection, setInvalidCollection] = useState(false);
   const [invalidCollectionMsg, setInvalidCollectionMsg] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     setSelectedAlbum(albums.find((album) => album.title === option.value));
@@ -76,6 +77,11 @@ const ImageCard = (props) => {
     }
   }
 
+  function enlargeImage(image) {
+    setModalShow(true);
+    setSelectedImage(image);
+  }
+
   const options = albums.map((album) => {
     return { value: album.title, label: album.title };
   });
@@ -83,7 +89,11 @@ const ImageCard = (props) => {
   return (
     <div className="image-card">
       <div className="card-image">
-        <img src={image.urls.regular} alt={image.alt_description} />
+        <img
+          src={image.urls.regular}
+          alt={image.alt_description}
+          onClick={() => setModalShow(true)}
+        />
       </div>
       <Select
         className="w-75"
@@ -116,6 +126,11 @@ const ImageCard = (props) => {
       {invalidCollection ? (
         <span className="invalid">{invalidCollectionMsg}</span>
       ) : null}
+      <ImageModal
+        image={image}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </div>
   );
 };
