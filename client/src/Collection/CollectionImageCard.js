@@ -3,7 +3,7 @@ import { Button, FormGroup, Input } from "reactstrap";
 import Select from "react-select";
 import axios from "axios";
 
-// import AddToAlbumButton from "./AddToAlbumButton";
+import ImageModal from "../ImageModal";
 
 import "../Home/ImageCard.css";
 
@@ -20,6 +20,7 @@ const CollectionImageCard = (props) => {
   const [validAlbumMsg, setValidAlbumMsg] = useState("");
   const [invalidAlbum, setInvalidAlbum] = useState(false);
   const [invalidAlbumMsg, setInvalidAlbumMsg] = useState("");
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     setSelectedAlbum(albums.find((album) => album.title === option.value));
@@ -82,7 +83,11 @@ const CollectionImageCard = (props) => {
   return (
     <div className="image-card">
       <div className="card-image">
-        <img src={collectionImage.url} alt={collectionImage.alt_description} />
+        <img
+          src={collectionImage.url}
+          alt={collectionImage.alt_description}
+          onClick={() => setModalShow(true)}
+        />
       </div>
 
       <Select
@@ -110,6 +115,11 @@ const CollectionImageCard = (props) => {
       >
         Delete Image
       </Button>
+      <ImageModal
+        collectionImage={collectionImage}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </div>
   );
 };

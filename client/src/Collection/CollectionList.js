@@ -5,6 +5,8 @@ import CollectionImageCard from "./CollectionImageCard";
 import "../Home/ImageList.css";
 import "../Home/Home.css";
 
+import "../Home/ImageCard.css";
+
 const CollectionList = (props) => {
   const { albums } = props;
   const [collectionImages, setCollectionImages] = useState([]);
@@ -31,11 +33,19 @@ const CollectionList = (props) => {
   });
 
   return (
-    <div className="text-center">
+    <div className="text-center d-flex flex-column justify-content-center align-items-center">
       <div className="heading">
         <h1 className="mt-3 mb-3">Collection</h1>
       </div>
-      <ul className="image-list">{collectionList}</ul>
+      {collectionImages.length ? (
+        <ul className="image-list">{collectionList}</ul>
+      ) : (
+        <div className="image-card">
+          <div className="p-3 bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
+            <p>Your collection is empty, add some images!</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

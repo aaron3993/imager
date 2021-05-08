@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Button, FormGroup, Input } from "reactstrap";
-
-import Select from "react-select";
+import { Button } from "reactstrap";
 import axios from "axios";
 
-// import AddToAlbumButton from "./AddToAlbumButton";
-
+import ImageModal from "../ImageModal";
 import "../Home/ImageCard.css";
 
 const AlbumImageCard = (props) => {
-  const { image, images, setImages, album } = props;
+  const { albumImage, images, setImages } = props;
+  const [modalShow, setModalShow] = useState(false);
 
   function removeFromAlbum() {
     try {
-      axios.delete(`http://localhost:8080/images/album/${image._id}`, image);
+      axios.delete(`http://localhost:8080/images/album/${albumImage._id}`);
       const imageToBeRemovedIndex = images.findIndex(
-        (imageCard) => image === imageCard
+        (imageCard) => albumImage === imageCard
       );
       const imagesCopy = [...images];
       imagesCopy.splice(imageToBeRemovedIndex, 1);
@@ -25,21 +23,16 @@ const AlbumImageCard = (props) => {
     }
   }
 
-  // async function addToCollection() {
-  //   try {
-  //     await axios.post("http://localhost:8080/images", image);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
   return (
     <div>
       <div className="image-card">
         <div className="card-image">
-          <img src={image.url} alt={image} />
+          <img
+            src={albumImage.url}
+            alt={albumImage.url}
+            onClick={() => setModalShow(true)}
+          />
         </div>
-        {/* <button onClick={() => addToCollection()}>Add</button> */}
         <Button
           className="p-1 mt-1 w-50"
           color="primary"
@@ -48,6 +41,11 @@ const AlbumImageCard = (props) => {
         >
           Remove Image
         </Button>
+        <ImageModal
+          albumImage={albumImage}
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
       </div>
     </div>
   );

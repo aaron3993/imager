@@ -47,7 +47,11 @@ const AlbumCard = (props) => {
       <h3>{albumCard.title}</h3>
       <div className="card-image">
         {loading ? null : images[0] ? (
-          <img src={images[0].url} alt={images[0].url} />
+          <img
+            src={images[0].url}
+            alt={images[0].url}
+            onClick={() => getAlbumImages()}
+          />
         ) : (
           <div className="p-3 bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
             <p>Your album is empty, add some images!</p>

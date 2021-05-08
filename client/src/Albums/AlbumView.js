@@ -25,11 +25,11 @@ const AlbumView = (props) => {
     setLoading(false);
   }, []);
 
-  const imageList = images.map((image, i) => {
+  const imageList = images.map((albumImage, i) => {
     return (
       <AlbumImageCard
         key={i}
-        image={image}
+        albumImage={albumImage}
         images={images}
         setImages={setImages}
         album={album}

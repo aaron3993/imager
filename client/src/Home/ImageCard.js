@@ -18,7 +18,6 @@ const ImageCard = (props) => {
   const [validCollectionMsg, setValidCollectionMsg] = useState("");
   const [invalidCollection, setInvalidCollection] = useState(false);
   const [invalidCollectionMsg, setInvalidCollectionMsg] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
@@ -75,11 +74,6 @@ const ImageCard = (props) => {
     } catch (err) {
       console.log(err);
     }
-  }
-
-  function enlargeImage(image) {
-    setModalShow(true);
-    setSelectedImage(image);
   }
 
   const options = albums.map((album) => {
