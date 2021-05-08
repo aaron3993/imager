@@ -143,8 +143,8 @@ export const removeFromAlbum = async (req, res) => {
   );
   await Album.findByIdAndUpdate(
     albumId,
-    { $pull: { images: image } },
+    { $pull: { images: { url: image.url } } },
     { new: true }
   );
-  return res.send("success");
+  return res.status(200);
 };
