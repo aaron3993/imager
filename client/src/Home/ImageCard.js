@@ -56,21 +56,21 @@ const ImageCard = (props) => {
         album: selectedAlbum,
         image: image,
       });
-      if (res.data.invalid) {
-        setValidAlbum(false);
-        setInvalidAlbum(true);
-        setInvalidAlbumMsg(res.data.invalid);
-        setTimeout(() => {
-          setInvalidAlbum(false);
-        }, 2000);
-      } else {
-        setInvalidAlbum(false);
-        setValidAlbum(true);
-        setValidAlbumMsg(res.data.valid);
-        setTimeout(() => {
-          setValidAlbum(false);
-        }, 2000);
-      }
+      // if (res.data.invalid) {
+      //   setValidAlbum(false);
+      //   setInvalidAlbum(true);
+      //   setInvalidAlbumMsg(res.data.invalid);
+      //   setTimeout(() => {
+      //     setInvalidAlbum(false);
+      //   }, 2000);
+      // } else {
+      //   setInvalidAlbum(false);
+      //   setValidAlbum(true);
+      //   setValidAlbumMsg(res.data.valid);
+      //   setTimeout(() => {
+      //     setValidAlbum(false);
+      //   }, 2000);
+      // }
     } catch (err) {
       console.log(err);
     }

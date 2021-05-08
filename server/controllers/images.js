@@ -76,7 +76,7 @@ export const addToAlbum = async (req, res) => {
       // Create the image
       const newImage = new Image({
         album_id: album._id,
-        url: image,
+        url: image.urls.regular,
       });
       // Add the image to the current album
       await Album.findByIdAndUpdate(
