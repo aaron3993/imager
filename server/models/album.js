@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const albumSchema = mongoose.Schema({
+  image_id: Array,
   title: String,
-  cover_image: String,
   createdAt: {
     type: Date,
     default: new Date(),

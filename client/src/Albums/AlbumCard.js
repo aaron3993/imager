@@ -11,7 +11,7 @@ const AlbumCard = (props) => {
   const { images, setImages, albumCard, albums, setAlbums } = props;
   const [loading, setLoading] = useState(true);
   let history = useHistory();
-  console.log(images);
+
   useEffect(() => {
     async function getAlbumImages() {
       const response = await axios.get(
