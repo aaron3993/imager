@@ -106,12 +106,12 @@ export const addToAlbum = async (req, res) => {
         { $push: { album_id: album._id } },
         { new: true }
       );
-      const currentAlbum = await Album.findByIdAndUpdate(
+      await Album.findByIdAndUpdate(
         album._id,
         { $push: { images: updatedImage } },
         { new: true }
       );
-      console.log( currentAlbum)
+
       await updatedImage.save();
       return res.send({ valid: `Image added to '${album.title}'!` });
     }
