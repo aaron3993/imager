@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Album from "../models/album.js";
 import Image from "../models/image.js";
 
 export const getCollection = async (req, res) => {
@@ -68,8 +69,7 @@ export const addToAlbum = async (req, res) => {
     return res.status(404).send("No album with that id");
 
   // Check if image exists in collection
-  const currentImage = await Image.findOne({ url: image });
-
+  const currentImage = await Image.findOne({ url: image.urls.regular });
   try {
     // If image doesn't exist in collection
     if (!currentImage) {
@@ -78,36 +78,42 @@ export const addToAlbum = async (req, res) => {
         album_id: album._id,
         url: image,
       });
+      // Add the image to the current album
+      await Album.findByIdAndUpdate(
+        album._id,
+        { $push: { images: newImage } },
+        { new: true }
+      );
       await newImage.save();
       return res.send({ valid: `Image added to '${album.title}'!` });
     }
 
     // If image exists in the collection, check if it is already in the album
     // Create an object to check if the image already belongs to an album
-    const images = await Image.find({ album_id: album._id });
+    // const images = await Image.find({ album_id: album._id });
 
-    const uniqueImagesObject = {};
-    for (let eachImage of images) {
-      if (eachImage.url === image) {
-        uniqueImagesObject[image] = 1;
-      }
-    }
+    // const uniqueImagesObject = {};
+    // for (let eachImage of images) {
+    //   if (eachImage.url === image) {
+    //     uniqueImagesObject[image] = 1;
+    //   }
+    // }
 
-    if (!uniqueImagesObject[image]) {
-      // If it isn't in the album already, update the image
-      const updatedImage = await Image.findOneAndUpdate(
-        { url: image },
-        { $push: { album_id: album._id } },
-        { new: true }
-      );
-      await updatedImage.save();
-      return res.send({ valid: `Image added to '${album.title}'!` });
-    }
+    // if (!uniqueImagesObject[image]) {
+    //   // If it isn't in the album already, update the image
+    //   const updatedImage = await Image.findOneAndUpdate(
+    //     { url: image },
+    //     { $push: { album_id: album._id } },
+    //     { new: true }
+    //   );
+    //   await updatedImage.save();
+    //   return res.send({ valid: `Image added to '${album.title}'!` });
+    // }
 
-    // If image exists in the album already
-    return res.send({
-      invalid: `'${album.title}' already contains this image.`,
-    });
+    // // If image exists in the album already
+    // return res.send({
+    //   invalid: `'${album.title}' already contains this image.`,
+    // });
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
