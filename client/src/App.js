@@ -13,11 +13,13 @@ import "bootstrap/dist/css/bootstrap.css";
 const App = (props) => {
   const [images, setImages] = useState([]);
   const [albums, setAlbums] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getAlbums() {
       let res = await axios.get("http://localhost:8080/albums");
       setAlbums(res.data);
+      setLoading(false);
     }
 
     getAlbums();
@@ -56,6 +58,8 @@ const App = (props) => {
                 setAlbums={setAlbums}
                 images={images}
                 setImages={setImages}
+                loading={loading}
+                setLoading={setLoading}
                 {...props}
               />
             )}

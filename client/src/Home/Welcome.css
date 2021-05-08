@@ -1,0 +1,23 @@
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: solid black 2px;
+  border-radius: 5%;
+  background-color: #c2eff2;
+  width: 30rem;
+  height: 30rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.welcome-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5%;
+}

@@ -45,7 +45,7 @@ const AlbumCard = (props) => {
   return (
     <div className="image-card">
       <h3>{albumCard.title}</h3>
-      <div className="card-image">
+      <div className="card-image text-center">
         {loading ? null : images[0] ? (
           <img
             src={images[0].url}
@@ -53,8 +53,13 @@ const AlbumCard = (props) => {
             onClick={() => getAlbumImages()}
           />
         ) : (
-          <div className="p-3 bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
-            <p>Your album is empty, add some images!</p>
+          <div className="p-3 bg-dark h-100 w-100 text-light d-flex flex-column justify-content-center align-items-center">
+            <h3>Your album is empty,</h3>
+            <h3>
+              <u>
+                <a href="/"> add some images!</a>
+              </u>
+            </h3>
           </div>
         )}
       </div>

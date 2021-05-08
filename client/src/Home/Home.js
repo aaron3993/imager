@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
 import ImageList from "./ImageList";
+import Welcome from "./Welcome";
 import "./Home.css";
 
 const Home = (props) => {
@@ -39,12 +40,14 @@ const Home = (props) => {
           </Button>
         </FormGroup>
       </Form>
-      {/* {!images.length ? (
-        <Welcome />
-      ) : (
-        <ImageList images={images} albums={albums} />
-      )} */}
-      <ImageList images={images} albums={albums} />
+      <div className="d-flex justify-content-center align-items-center">
+        {!images.length ? (
+          <Welcome />
+        ) : (
+          <ImageList images={images} albums={albums} />
+        )}
+      </div>
+      {/* <ImageList images={images} albums={albums} /> */}
     </div>
   );
 };

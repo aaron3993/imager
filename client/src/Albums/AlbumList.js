@@ -8,7 +8,7 @@ import "../Home/Home.css";
 // import "../Home/CardList.css";
 
 const AlbumList = (props) => {
-  const { images, setImages, albums, setAlbums } = props;
+  const { images, setImages, albums, setAlbums, loading, setLoading } = props;
   const [title, setTitle] = useState("");
   const [valid, setValid] = useState(false);
   const [validMsg, setValidMsg] = useState("");
@@ -61,6 +61,10 @@ const AlbumList = (props) => {
       })
     : null;
 
+  if (loading) {
+    return null;
+  }
+
   return (
     <div>
       <Form className="heading" onSubmit={(e) => createAlbum(e)}>
@@ -81,14 +85,17 @@ const AlbumList = (props) => {
         {valid ? <span className="valid">{validMsg}</span> : null}
         {invalid ? <span className="invalid">{invalidMsg}</span> : null}
       </Form>
-      <ul className="image-list">{albumList}</ul>
-      {/* <div>
+      <div className="d-flex flex-column justify-content-center align-items-center">
         {albums.length ? (
           <ul className="image-list">{albumList}</ul>
         ) : (
-          <p>You do not have any albums.</p>
+          <div className="image-card text-center">
+            <div className="p-3 bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
+              <h3>You have no albums, create some!</h3>
+            </div>
+          </div>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };
