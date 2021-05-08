@@ -21,6 +21,18 @@ export const getAlbumImages = async (req, res) => {
   }
 };
 
+export const getAlbumCoverImage = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const album = await Album.findById(id);
+    const coverImage = album.images[0];
+    res.status(200).json(coverImage);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
 export const getAlbum = async (req, res) => {
   const { id } = req.params;
   Album.findById(id)

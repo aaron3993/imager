@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Album from "../models/album.js";
 import Image from "../models/image.js";
 
 export const getCollection = async (req, res) => {
@@ -60,7 +61,13 @@ export const removeFromCollection = async (req, res) => {
 };
 
 export const addToAlbum = async (req, res) => {
-  const { album, image } = req.body;
+  const { album, image, collectionImage } = req.body;
+
+  const imageUrl = image
+    ? image.urls.regular
+    : collectionImage
+    ? collectionImage.url
+    : null;
 
   if (!album) return res.send({ invalid: "No album was selected." });
 
@@ -68,36 +75,46 @@ export const addToAlbum = async (req, res) => {
     return res.status(404).send("No album with that id");
 
   // Check if image exists in collection
-  const currentImage = await Image.findOne({ url: image });
-
+  const currentImage = await Image.findOne({ url: imageUrl });
   try {
     // If image doesn't exist in collection
     if (!currentImage) {
       // Create the image
       const newImage = new Image({
         album_id: album._id,
-        url: image,
+        url: imageUrl,
       });
+      // Add the image to the current album
+      await Album.findByIdAndUpdate(
+        album._id,
+        { $push: { images: newImage } },
+        { new: true }
+      );
       await newImage.save();
       return res.send({ valid: `Image added to '${album.title}'!` });
     }
 
     // If image exists in the collection, check if it is already in the album
-    // Create an object to check if the image already belongs to an album
     const images = await Image.find({ album_id: album._id });
 
+    // Create an object to check if the image already belongs to an album
     const uniqueImagesObject = {};
     for (let eachImage of images) {
-      if (eachImage.url === image) {
-        uniqueImagesObject[image] = 1;
+      if (eachImage.url === imageUrl) {
+        uniqueImagesObject[imageUrl] = 1;
       }
     }
 
-    if (!uniqueImagesObject[image]) {
-      // If it isn't in the album already, update the image
+    if (!uniqueImagesObject[imageUrl]) {
+      // If it isn't in the album already, update the image and album
       const updatedImage = await Image.findOneAndUpdate(
-        { url: image },
+        { url: imageUrl },
         { $push: { album_id: album._id } },
+        { new: true }
+      );
+      await Album.findByIdAndUpdate(
+        album._id,
+        { $push: { images: updatedImage } },
         { new: true }
       );
       await updatedImage.save();
@@ -114,10 +131,20 @@ export const addToAlbum = async (req, res) => {
 };
 
 export const removeFromAlbum = async (req, res) => {
-  const { id } = req.params;
+  const { albumId, imageId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id))
+  if (!mongoose.Types.ObjectId.isValid(imageId))
     return res.status(404).send("No image with that id");
 
-  await Image.findByIdAndDelete(id);
+  const image = await Image.findByIdAndUpdate(
+    imageId,
+    { $pull: { album_id: albumId } },
+    { new: true }
+  );
+  await Album.findByIdAndUpdate(
+    albumId,
+    { $pull: { images: { url: image.url } } },
+    { new: true }
+  );
+  return res.status(200);
 };

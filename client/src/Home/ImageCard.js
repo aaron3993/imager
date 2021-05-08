@@ -50,7 +50,7 @@ const ImageCard = (props) => {
     }
   }
 
-  async function addToAlbum(image) {
+  async function addToAlbum() {
     try {
       const res = await axios.post(`http://localhost:8080/images/album`, {
         album: selectedAlbum,
@@ -100,7 +100,7 @@ const ImageCard = (props) => {
         className="p-1 mt-1 w-75"
         color="primary"
         type="submit"
-        onClick={() => addToAlbum(image.urls.regular, option.value)}
+        onClick={() => addToAlbum()}
       >
         Add to Album
       </Button>

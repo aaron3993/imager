@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   getAlbumImages,
+  getAlbumCoverImage,
   getAlbums,
   createAlbum,
   getAlbum,
@@ -12,6 +13,7 @@ const router = express.Router();
 
 router.get("/", getAlbums);
 router.get("/:id", getAlbum);
+router.get("/:id/image", getAlbumCoverImage);
 router.get("/:id/images", getAlbumImages);
 router.post("/", createAlbum);
 router.delete("/:id", deleteAlbum);
