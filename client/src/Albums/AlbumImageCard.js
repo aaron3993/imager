@@ -6,12 +6,14 @@ import ImageModal from "../ImageModal";
 import "../Home/ImageCard.css";
 
 const AlbumImageCard = (props) => {
-  const { albumImage, images, setImages } = props;
+  const { album, albumImage, images, setImages } = props;
   const [modalShow, setModalShow] = useState(false);
-
+  console.log(albumImage);
   function removeFromAlbum() {
     try {
-      axios.delete(`http://localhost:8080/images/album/${albumImage._id}`);
+      axios.delete(
+        `http://localhost:8080/images/album/${album._id}/${albumImage._id}`
+      );
       const imageToBeRemovedIndex = images.findIndex(
         (imageCard) => albumImage === imageCard
       );

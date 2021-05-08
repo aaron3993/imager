@@ -33,12 +33,12 @@ const CollectionImageCard = (props) => {
   //     console.log(err);
   //   }
   // }
-
-  async function addToAlbum(image) {
+  console.log(collectionImage);
+  async function addToAlbum() {
     try {
       const res = await axios.post(`http://localhost:8080/images/album`, {
         album: selectedAlbum,
-        image: image,
+        collectionImage: collectionImage,
       });
       if (res.data.invalid) {
         setValidAlbum(false);
@@ -101,7 +101,7 @@ const CollectionImageCard = (props) => {
         className="p-1 mt-1 w-75"
         color="primary"
         type="submit"
-        onClick={() => addToAlbum(collectionImage.url)}
+        onClick={() => addToAlbum()}
       >
         Add to Album
       </Button>
