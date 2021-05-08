@@ -89,31 +89,37 @@ export const addToAlbum = async (req, res) => {
     }
 
     // If image exists in the collection, check if it is already in the album
+    const images = await Image.find({ album_id: album._id });
+
     // Create an object to check if the image already belongs to an album
-    // const images = await Image.find({ album_id: album._id });
+    const uniqueImagesObject = {};
+    for (let eachImage of images) {
+      if (eachImage.url === image.urls.regular) {
+        uniqueImagesObject[image.urls.regular] = 1;
+      }
+    }
 
-    // const uniqueImagesObject = {};
-    // for (let eachImage of images) {
-    //   if (eachImage.url === image) {
-    //     uniqueImagesObject[image] = 1;
-    //   }
-    // }
+    if (!uniqueImagesObject[image.urls.regular]) {
+      // If it isn't in the album already, update the image and album
+      const updatedImage = await Image.findOneAndUpdate(
+        { url: image.urls.regular },
+        { $push: { album_id: album._id } },
+        { new: true }
+      );
+      const currentAlbum = await Album.findByIdAndUpdate(
+        album._id,
+        { $push: { images: updatedImage } },
+        { new: true }
+      );
+      console.log( currentAlbum)
+      await updatedImage.save();
+      return res.send({ valid: `Image added to '${album.title}'!` });
+    }
 
-    // if (!uniqueImagesObject[image]) {
-    //   // If it isn't in the album already, update the image
-    //   const updatedImage = await Image.findOneAndUpdate(
-    //     { url: image },
-    //     { $push: { album_id: album._id } },
-    //     { new: true }
-    //   );
-    //   await updatedImage.save();
-    //   return res.send({ valid: `Image added to '${album.title}'!` });
-    // }
-
-    // // If image exists in the album already
-    // return res.send({
-    //   invalid: `'${album.title}' already contains this image.`,
-    // });
+    // If image exists in the album already
+    return res.send({
+      invalid: `'${album.title}' already contains this image.`,
+    });
   } catch (err) {
     res.status(409).json({ message: err.message });
   }

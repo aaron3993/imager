@@ -40,7 +40,7 @@ const AlbumView = (props) => {
   if (loading) {
     return null;
   }
-  console.log(album);
+
   return (
     <div className="text-center mt-3">
       <h1>{album.title}f</h1>
