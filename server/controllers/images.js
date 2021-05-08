@@ -146,4 +146,5 @@ export const removeFromAlbum = async (req, res) => {
     { $pull: { images: image } },
     { new: true }
   );
+  return res.send("success");
 };

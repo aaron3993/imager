@@ -10,18 +10,29 @@ import "../Home/ImageCard.css";
 const AlbumCard = (props) => {
   const { images, setImages, albumCard, albums, setAlbums } = props;
   const [loading, setLoading] = useState(true);
+  const [coverImage, setCoverImage] = useState({});
   let history = useHistory();
 
   useEffect(() => {
-    async function getAlbumImages() {
+    // async function getAlbumImages() {
+    //   const response = await axios.get(
+    //     `http://localhost:8080/albums/${albumCard._id}/images`
+    //   );
+    //   setImages(response.data);
+    //   setLoading(false);
+    // }
+
+    // getAlbumImages();
+
+    async function getAlbumCoverImage() {
       const response = await axios.get(
-        `http://localhost:8080/albums/${albumCard._id}/images`
+        `http://localhost:8080/albums/${albumCard._id}/image`
       );
-      setImages(response.data);
+      setCoverImage(response.data);
       setLoading(false);
     }
 
-    getAlbumImages();
+    getAlbumCoverImage();
   }, []);
 
   async function deleteAlbum() {
@@ -42,10 +53,10 @@ const AlbumCard = (props) => {
     <div className="image-card">
       <h3>{albumCard.title}</h3>
       <div className="card-image text-center">
-        {loading ? null : images[0] ? (
+        {loading ? null : coverImage ? (
           <img
-            src={images[0].url}
-            alt={images[0].url}
+            src={coverImage.url}
+            alt={coverImage.url}
             onClick={() => history.push(`/albums/${albumCard._id}`)}
           />
         ) : (

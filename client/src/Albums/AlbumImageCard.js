@@ -8,7 +8,7 @@ import "../Home/ImageCard.css";
 const AlbumImageCard = (props) => {
   const { album, albumImage, images, setImages } = props;
   const [modalShow, setModalShow] = useState(false);
-  console.log(albumImage);
+
   function removeFromAlbum() {
     try {
       axios.delete(
