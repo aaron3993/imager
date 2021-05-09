@@ -25,15 +25,6 @@ const App = (props) => {
     getAlbums();
   }, []);
 
-  // async function addToAlbum(image, album) {
-  //   try {
-  //     await axios.post(`http://localhost:8080/albums/${album._id}`);
-  //     console.log("Post request successful");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
   return (
     <>
       <NavBar />

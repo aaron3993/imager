@@ -5,15 +5,16 @@ import Image from "../models/image.js";
 export const getCollection = async (req, res) => {
   try {
     const images = await Image.find();
-    const uniqueImagesArray = [];
-    const uniqueImagesObject = {};
-    for (let image of images) {
-      if (!uniqueImagesObject[image.url]) {
-        uniqueImagesObject[image.url] = 1;
-        uniqueImagesArray.push(image);
-      }
-    }
-    res.status(200).json(uniqueImagesArray);
+    // const uniqueImagesArray = [];
+    // const uniqueImagesObject = {};
+    // for (let image of images) {
+    //   if (!uniqueImagesObject[image.url]) {
+    //     uniqueImagesObject[image.url] = 1;
+    //     uniqueImagesArray.push(image);
+    //   }
+    // }
+    // res.status(200).json(uniqueImagesArray);
+    res.status(200).json(images);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -55,7 +56,34 @@ export const removeFromCollection = async (req, res) => {
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No image with that id");
+  // await Image.findByIdAndUpdate(id, { $pull: { album_id: id } },);
+
+  const image = await Image.findById(id);
+  const albums = await Album.find();
+  for (let album of albums) {
+    for (let albumImage of album.images) {
+      if (albumImage.url === image.url) {
+        let imageIndex = album.images.indexOf(albumImage);
+        album.images.splice(imageIndex, 1);
+      }
+    }
+    console.log(album);
+    album.save();
+  }
+
+  // const before = await Album.findOne({ images: { _id: id } });
+  // console.log(before);
+  // for (let image of before.images) {
+  //   console.log(image._id);
+  // }
   await Image.findByIdAndDelete(id);
+  // console.log(image.id);
+  // const albums = await Album.findOneAndUpdate(
+  //   { images: { _id: id } },
+  //   { $pull: { images: { _id: id } } },
+  //   { new: true }
+  // );
+  // console.log(albums);
 
   res.json({ message: "Image remove successfully" });
 };
@@ -141,10 +169,13 @@ export const removeFromAlbum = async (req, res) => {
     { $pull: { album_id: albumId } },
     { new: true }
   );
-  await Album.findByIdAndUpdate(
+  const before = await Album.findById(albumId);
+  console.log(before.images.length);
+  const after = await Album.findByIdAndUpdate(
     albumId,
     { $pull: { images: { url: image.url } } },
     { new: true }
   );
+  console.log(after.images.length);
   return res.status(200);
 };

@@ -66,7 +66,7 @@ const CollectionImageCard = (props) => {
 
   async function removeFromCollection() {
     try {
-      await axios.patch(
+      await axios.delete(
         `http://localhost:8080/images/collection/${collectionImage._id}`
       );
       const collectionToBeRemovedIndex = collectionImages.findIndex(
