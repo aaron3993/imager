@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { Button, FormGroup, Input } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { Button } from "reactstrap";
 import axios from "axios";
-
-// import AddToAlbumButton from "./AddToAlbumButton";
 
 import "../Home/ImageCard.css";
 
 const AlbumCard = (props) => {
-  const { images, setImages, albumCard, albums, setAlbums } = props;
+  const { albumCard, albums, setAlbums } = props;
   const [loading, setLoading] = useState(true);
   const [coverImage, setCoverImage] = useState({});
   let history = useHistory();
 
   useEffect(() => {
-    // async function getAlbumImages() {
-    //   const response = await axios.get(
-    //     `http://localhost:8080/albums/${albumCard._id}/images`
-    //   );
-    //   setImages(response.data);
-    //   setLoading(false);
-    // }
-
-    // getAlbumImages();
-
     async function getAlbumCoverImage() {
       const response = await axios.get(
         `http://localhost:8080/albums/${albumCard._id}/image`

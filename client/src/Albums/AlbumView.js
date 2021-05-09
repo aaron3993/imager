@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import { Button } from "reactstrap";
 import axios from "axios";
 
 import AlbumImageCard from "./AlbumImageCard";
@@ -8,6 +9,7 @@ import "../Home/ImageList.css";
 import "../Home/ImageCard.css";
 
 const AlbumView = (props) => {
+  let history = useHistory();
   const { id } = useParams();
   const { images, setImages } = props;
   const [album, setAlbum] = useState({});
@@ -25,7 +27,6 @@ const AlbumView = (props) => {
       const albumResponse = await axios.get(
         `http://localhost:8080/albums/${id}`
       );
-      console.log(albumResponse.data);
       setAlbum(albumResponse.data);
 
       setLoading(false);
@@ -71,6 +72,14 @@ const AlbumView = (props) => {
                 </h3>
               </div>
             </div>
+            <Button
+              className="mt-1 w-75"
+              color="primary"
+              type="submit"
+              onClick={() => history.push("/albums")}
+            >
+              Back to Albums
+            </Button>
           </div>
         </div>
       )}
