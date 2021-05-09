@@ -20,7 +20,7 @@ const CollectionList = (props) => {
     }
 
     getCollection();
-  }, []);
+  }, [collectionImages]);
 
   const collectionList = collectionImages.map((collectionImage) => {
     return (

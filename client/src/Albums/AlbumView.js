@@ -15,7 +15,7 @@ const AlbumView = (props) => {
   const [album, setAlbum] = useState({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  useEffect(async () => {
     async function getAlbumImages() {
       const response = await axios.get(
         `http://localhost:8080/albums/${id}/images`
@@ -31,8 +31,8 @@ const AlbumView = (props) => {
       setLoading(false);
     }
 
-    getAlbumImages();
-    getAlbums();
+    await getAlbumImages();
+    await getAlbums();
   }, []);
 
   const imageList = images.map((albumImage, i) => {
