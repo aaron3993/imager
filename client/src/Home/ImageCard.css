@@ -48,3 +48,21 @@
 .image-card:hover {
   border: solid black 3px;
 }
+
+@media (max-width: 400px) {
+  .image-card {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .card-image {
+    height: 40%;
+  }
+}
+
+@media (max-width: 320px) {
+  .image-card {
+    width: 15rem;
+    height: 15rem;
+  }
+}

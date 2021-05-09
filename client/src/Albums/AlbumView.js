@@ -74,7 +74,7 @@ const AlbumView = (props) => {
           </div>
         </div>
       )}
-      <div className="w-75 m-auto text-center">
+      <div className="w-50 m-auto text-center">
         <Button
           className="mt-1 w-25"
           color="primary"
