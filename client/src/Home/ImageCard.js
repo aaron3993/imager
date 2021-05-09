@@ -18,6 +18,8 @@ const ImageCard = (props) => {
   const [validCollectionMsg, setValidCollectionMsg] = useState("");
   const [invalidCollection, setInvalidCollection] = useState(false);
   const [invalidCollectionMsg, setInvalidCollectionMsg] = useState("");
+  const [noAlbum, setNoAlbum] = useState(false);
+  const [noAlbumMsg, setNoAlbumMsg] = useState("");
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
@@ -36,14 +38,14 @@ const ImageCard = (props) => {
         setInvalidCollectionMsg(res.data.invalid);
         setTimeout(() => {
           setInvalidCollection(false);
-        }, 2000);
+        }, 3000);
       } else {
         setInvalidCollection(false);
         setValidCollection(true);
         setValidCollectionMsg(res.data.valid);
         setTimeout(() => {
           setValidCollection(false);
-        }, 2000);
+        }, 3000);
       }
     } catch (err) {
       console.log(err);
@@ -58,18 +60,27 @@ const ImageCard = (props) => {
       });
       if (res.data.invalid) {
         setValidAlbum(false);
+        setNoAlbum(false);
         setInvalidAlbum(true);
         setInvalidAlbumMsg(res.data.invalid);
         setTimeout(() => {
           setInvalidAlbum(false);
-        }, 2000);
+        }, 3000);
+      } else if (res.data.noAlbum) {
+        setValidAlbum(false);
+        setInvalidAlbum(false);
+        setNoAlbum(true);
+        setNoAlbumMsg(res.data.noAlbum);
+        setTimeout(() => {
+          setNoAlbum(false);
+        }, 3000);
       } else {
         setInvalidAlbum(false);
         setValidAlbum(true);
         setValidAlbumMsg(res.data.valid);
         setTimeout(() => {
           setValidAlbum(false);
-        }, 2000);
+        }, 3000);
       }
     } catch (err) {
       console.log(err);
@@ -111,6 +122,11 @@ const ImageCard = (props) => {
         </span>
       ) : null}
       {invalidAlbum ? <span className="invalid">{invalidAlbumMsg}</span> : null}
+      {noAlbum ? (
+        <span className="invalid">
+          {noAlbumMsg} <a href="/albums">Create an album</a>
+        </span>
+      ) : null}
       <Button
         className="p-1 mt-1 w-75"
         color="primary"

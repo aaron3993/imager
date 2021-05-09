@@ -69,7 +69,7 @@ export const addToAlbum = async (req, res) => {
     ? collectionImage.url
     : null;
 
-  if (!album) return res.send({ invalid: "No album was selected." });
+  if (!album) return res.send({ noAlbum: "No album was selected." });
 
   if (!mongoose.Types.ObjectId.isValid(album._id))
     return res.status(404).send("No album with that id");
