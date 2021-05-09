@@ -53,7 +53,7 @@ const Home = (props) => {
           </Button>
         </FormGroup>
       </Form>
-      <div className="d-flex justify-content-center align-items-center">
+      <div className="mt-3 d-flex justify-content-center align-items-center">
         {!images.length ? (
           <Welcome />
         ) : (

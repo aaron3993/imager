@@ -8,6 +8,7 @@ import CollectionList from "./Collection/CollectionList";
 import AlbumList from "./Albums/AlbumList";
 import AlbumView from "./Albums/AlbumView";
 
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 const App = (props) => {

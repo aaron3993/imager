@@ -85,7 +85,7 @@ const AlbumList = (props) => {
         {valid ? <span className="valid">{validMsg}</span> : null}
         {invalid ? <span className="invalid">{invalidMsg}</span> : null}
       </Form>
-      <div className="d-flex flex-column justify-content-center align-items-center">
+      <div className="mt-5 d-flex flex-column justify-content-center align-items-center">
         {albums.length ? (
           <ul className="image-list">{albumList}</ul>
         ) : (
