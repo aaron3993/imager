@@ -13,7 +13,9 @@ const Home = (props) => {
       ? JSON.parse(localStorage.getItem("images"))
       : []
   );
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(
+    localStorage.getItem("search") ? localStorage.getItem("search") : ""
+  );
 
   const searchImages = async (e, term) => {
     e.preventDefault();
@@ -27,6 +29,11 @@ const Home = (props) => {
     localStorage.setItem("images", JSON.stringify(response.data.results));
   };
 
+  const searchText = (e) => {
+    setSearch(e.target.value);
+    localStorage.setItem("search", e.target.value);
+  };
+
   return (
     <div>
       <Form className="heading" onSubmit={(e) => searchImages(e, search)}>
@@ -37,7 +44,7 @@ const Home = (props) => {
             type="text"
             placeholder="Search Images"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => searchText(e)}
           />
         </FormGroup>
         <FormGroup>

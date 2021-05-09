@@ -5,6 +5,7 @@ import axios from "axios";
 import AlbumImageCard from "./AlbumImageCard";
 
 import "../Home/ImageList.css";
+import "../Home/ImageCard.css";
 
 const AlbumView = (props) => {
   const { id } = useParams();
@@ -51,9 +52,28 @@ const AlbumView = (props) => {
   }
 
   return (
-    <div className="text-center mt-3">
-      <h1>{album.title}</h1>
-      <div className="image-list">{imageList}</div>
+    <div>
+      <div className="heading text-center">
+        <h1 className="mt-3 mb-3">{album.title}</h1>
+      </div>
+      {images.length ? (
+        <div className="image-list">{imageList}</div>
+      ) : (
+        <div className="d-flex justify-content-center">
+          <div className="image-card">
+            <div className="card-image text-center">
+              <div className="p-3 bg-dark h-100 w-100 text-light d-flex flex-column justify-content-center align-items-center">
+                <h3>Your album is empty,</h3>
+                <h3>
+                  <u>
+                    <a href="/"> add some images!</a>
+                  </u>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
