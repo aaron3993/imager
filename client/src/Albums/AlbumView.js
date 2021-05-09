@@ -14,6 +14,7 @@ const AlbumView = (props) => {
   const { images, setImages } = props;
   const [album, setAlbum] = useState({});
   const [loading, setLoading] = useState(true);
+  const [imagesLoading, setImagesLoading] = useState(true);
 
   useEffect(() => {
     // async function getAlbumImages() {
@@ -31,7 +32,6 @@ const AlbumView = (props) => {
       setLoading(false);
     }
 
-    // await getAlbumImages();
     getAlbum();
   }, []);
 
@@ -41,11 +41,12 @@ const AlbumView = (props) => {
         `http://localhost:8080/albums/${id}/images`
       );
       setImages(response.data);
+      setImagesLoading(false);
     }
 
     getAlbumImages();
-  }, [images, setImages]);
-
+  }, [setImages]);
+  console.log(images);
   const imageList = images.map((albumImage, i) => {
     return (
       <AlbumImageCard
@@ -61,6 +62,12 @@ const AlbumView = (props) => {
   if (loading) {
     return null;
   }
+  if (imagesLoading) {
+    return null;
+  }
+  // if (!images.length) {
+  //   return null;
+  // }
 
   if (!album) {
     return (
@@ -91,6 +98,7 @@ const AlbumView = (props) => {
       <div className="heading text-center">
         <h1 className="mt-3 mb-3">{album.title}</h1>
       </div>
+
       {images.length ? (
         <div className="image-list">{imageList}</div>
       ) : (
