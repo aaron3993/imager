@@ -76,6 +76,7 @@ const ImageCard = (props) => {
         }, 3000);
       } else {
         setInvalidAlbum(false);
+        setNoAlbum(false);
         setValidAlbum(true);
         setValidAlbumMsg(res.data.valid);
         setTimeout(() => {

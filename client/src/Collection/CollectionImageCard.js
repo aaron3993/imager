@@ -36,6 +36,7 @@ const CollectionImageCard = (props) => {
       });
       if (res.data.invalid) {
         setValidAlbum(false);
+        setNoAlbum(false);
         setInvalidAlbum(true);
         setInvalidAlbumMsg(res.data.invalid);
         setTimeout(() => {
@@ -51,6 +52,7 @@ const CollectionImageCard = (props) => {
         }, 3000);
       } else {
         setInvalidAlbum(false);
+        setNoAlbum(false);
         setValidAlbum(true);
         setValidAlbumMsg(res.data.valid);
         setTimeout(() => {
