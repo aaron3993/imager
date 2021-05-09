@@ -71,6 +71,7 @@ const AlbumList = (props) => {
         <h1 className="mt-3">Albums</h1>
         <FormGroup>
           <Input
+            autoFocus={true}
             type="text"
             placeholder="Create a new album"
             value={title}

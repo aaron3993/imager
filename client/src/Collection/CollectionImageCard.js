@@ -20,6 +20,8 @@ const CollectionImageCard = (props) => {
   const [validAlbumMsg, setValidAlbumMsg] = useState("");
   const [invalidAlbum, setInvalidAlbum] = useState(false);
   const [invalidAlbumMsg, setInvalidAlbumMsg] = useState("");
+  const [noAlbum, setNoAlbum] = useState(false);
+  const [noAlbumMsg, setNoAlbumMsg] = useState("");
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
@@ -38,14 +40,22 @@ const CollectionImageCard = (props) => {
         setInvalidAlbumMsg(res.data.invalid);
         setTimeout(() => {
           setInvalidAlbum(false);
-        }, 2000);
+        }, 3000);
+      } else if (res.data.noAlbum) {
+        setValidAlbum(false);
+        setInvalidAlbum(false);
+        setNoAlbum(true);
+        setNoAlbumMsg(res.data.noAlbum);
+        setTimeout(() => {
+          setNoAlbum(false);
+        }, 3000);
       } else {
         setInvalidAlbum(false);
         setValidAlbum(true);
         setValidAlbumMsg(res.data.valid);
         setTimeout(() => {
           setValidAlbum(false);
-        }, 2000);
+        }, 3000);
       }
     } catch (err) {
       console.log(err);
@@ -104,6 +114,11 @@ const CollectionImageCard = (props) => {
         </span>
       ) : null}
       {invalidAlbum ? <span className="invalid">{invalidAlbumMsg}</span> : null}
+      {noAlbum ? (
+        <span className="invalid">
+          {noAlbumMsg} <a href="/albums">Create an album</a>
+        </span>
+      ) : null}
       <Button
         className="p-1 mt-1 w-75"
         color="primary"

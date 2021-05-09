@@ -8,7 +8,11 @@ import "./Home.css";
 
 const Home = (props) => {
   const { albums } = props;
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(
+    localStorage.getItem("images")
+      ? JSON.parse(localStorage.getItem("images"))
+      : []
+  );
   const [search, setSearch] = useState("");
 
   const searchImages = async (e, term) => {
@@ -20,6 +24,7 @@ const Home = (props) => {
       },
     });
     setImages(response.data.results);
+    localStorage.setItem("images", JSON.stringify(response.data.results));
   };
 
   return (
@@ -48,7 +53,6 @@ const Home = (props) => {
           <ImageList images={images} albums={albums} />
         )}
       </div>
-      {/* <ImageList images={images} albums={albums} /> */}
     </div>
   );
 };
