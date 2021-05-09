@@ -15,15 +15,15 @@ const AlbumView = (props) => {
   const [album, setAlbum] = useState({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(async () => {
-    async function getAlbumImages() {
-      const response = await axios.get(
-        `http://localhost:8080/albums/${id}/images`
-      );
-      setImages(response.data);
-    }
+  useEffect(() => {
+    // async function getAlbumImages() {
+    //   const response = await axios.get(
+    //     `http://localhost:8080/albums/${id}/images`
+    //   );
+    //   setImages(response.data);
+    // }
 
-    async function getAlbums() {
+    async function getAlbum() {
       const albumResponse = await axios.get(
         `http://localhost:8080/albums/${id}`
       );
@@ -31,9 +31,20 @@ const AlbumView = (props) => {
       setLoading(false);
     }
 
-    await getAlbumImages();
-    await getAlbums();
+    // await getAlbumImages();
+    getAlbum();
   }, []);
+
+  useEffect(() => {
+    async function getAlbumImages() {
+      const response = await axios.get(
+        `http://localhost:8080/albums/${id}/images`
+      );
+      setImages(response.data);
+    }
+
+    getAlbumImages();
+  }, [images, setImages]);
 
   const imageList = images.map((albumImage, i) => {
     return (
