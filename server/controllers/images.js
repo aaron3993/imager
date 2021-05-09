@@ -56,8 +56,8 @@ export const removeFromCollection = async (req, res) => {
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No image with that id");
-  // await Image.findByIdAndUpdate(id, { $pull: { album_id: id } },);
 
+  // Remove image from any album that has it
   const image = await Image.findById(id);
   const albums = await Album.find();
   for (let album of albums) {
@@ -67,23 +67,11 @@ export const removeFromCollection = async (req, res) => {
         album.images.splice(imageIndex, 1);
       }
     }
-    console.log(album);
     album.save();
   }
 
-  // const before = await Album.findOne({ images: { _id: id } });
-  // console.log(before);
-  // for (let image of before.images) {
-  //   console.log(image._id);
-  // }
+  // Delete the image
   await Image.findByIdAndDelete(id);
-  // console.log(image.id);
-  // const albums = await Album.findOneAndUpdate(
-  //   { images: { _id: id } },
-  //   { $pull: { images: { _id: id } } },
-  //   { new: true }
-  // );
-  // console.log(albums);
 
   res.json({ message: "Image remove successfully" });
 };
@@ -169,13 +157,10 @@ export const removeFromAlbum = async (req, res) => {
     { $pull: { album_id: albumId } },
     { new: true }
   );
-  const before = await Album.findById(albumId);
-  console.log(before.images.length);
-  const after = await Album.findByIdAndUpdate(
+  await Album.findByIdAndUpdate(
     albumId,
     { $pull: { images: { url: image.url } } },
     { new: true }
   );
-  console.log(after.images.length);
   return res.status(200);
 };
