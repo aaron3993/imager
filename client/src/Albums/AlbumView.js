@@ -28,7 +28,6 @@ const AlbumView = (props) => {
         `http://localhost:8080/albums/${id}`
       );
       setAlbum(albumResponse.data);
-
       setLoading(false);
     }
 
@@ -72,17 +71,19 @@ const AlbumView = (props) => {
                 </h3>
               </div>
             </div>
-            <Button
-              className="mt-1 w-75"
-              color="primary"
-              type="submit"
-              onClick={() => history.push("/albums")}
-            >
-              Back to Albums
-            </Button>
           </div>
         </div>
       )}
+      <div className="w-75 m-auto text-center">
+        <Button
+          className="mt-1 w-25"
+          color="primary"
+          type="submit"
+          onClick={() => history.push("/albums")}
+        >
+          Back to Albums
+        </Button>
+      </div>
     </div>
   );
 };

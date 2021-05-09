@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
 import AlbumCard from "./AlbumCard";
 import "../Home/ImageList.css";
 import "../Home/Home.css";
-// import "../Home/CardList.css";
 
 const AlbumList = (props) => {
   const { images, setImages, albums, setAlbums, loading } = props;

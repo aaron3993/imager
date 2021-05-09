@@ -6,10 +6,10 @@ import axios from "axios";
 import "../Home/ImageCard.css";
 
 const AlbumCard = (props) => {
+  let history = useHistory();
   const { albumCard, albums, setAlbums } = props;
   const [loading, setLoading] = useState(true);
   const [coverImage, setCoverImage] = useState({});
-  let history = useHistory();
 
   useEffect(() => {
     async function getAlbumCoverImage() {
