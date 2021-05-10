@@ -2,3 +2,7 @@ body {
   background: url("./images/light-background.jpg");
   background-size: cover;
 }
+
+* {
+  font-family: cursive;
+}

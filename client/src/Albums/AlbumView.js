@@ -88,7 +88,7 @@ const AlbumView = (props) => {
       </div>
 
       {images.length ? (
-        <div className="image-list">{imageList}</div>
+        <div className="image-list mt-3">{imageList}</div>
       ) : (
         <div className="mt-5 d-flex justify-content-center">
           <div className="image-card">

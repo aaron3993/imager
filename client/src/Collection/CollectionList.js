@@ -48,10 +48,10 @@ const CollectionList = (props) => {
         </p>
       </div>
       {collectionImages.length ? (
-        <ul className="image-list">{collectionList}</ul>
+        <ul className="image-list mt-3">{collectionList}</ul>
       ) : (
         <div className="image-card mt-5 text-center">
-          <div className="welcome-container bg-dark text-light">
+          <div className="welcome-container p-3 bg-dark text-light">
             <h3>
               Your collection is empty,{" "}
               <span>
