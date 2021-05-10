@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import CollectionImageCard from "./CollectionImageCard";
 import "../Home/ImageList.css";
 import "../Home/Home.css";
-
+import "../Home/Welcome.css";
 import "../Home/ImageCard.css";
 
 const CollectionList = (props) => {
@@ -50,12 +51,12 @@ const CollectionList = (props) => {
         <ul className="image-list">{collectionList}</ul>
       ) : (
         <div className="image-card mt-5 text-center">
-          <div className="p-3 bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
+          <div className="welcome-container bg-dark text-light">
             <h3>
               Your collection is empty,{" "}
               <span>
                 <u>
-                  <a href="/">add some images!</a>
+                  <Link to="/">add some images!</Link>
                 </u>
               </span>
             </h3>

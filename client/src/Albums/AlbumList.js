@@ -5,6 +5,7 @@ import axios from "axios";
 import AlbumCard from "./AlbumCard";
 import "../Home/ImageList.css";
 import "../Home/Home.css";
+import "../Home/Welcome.css";
 
 const AlbumList = (props) => {
   const { images, setImages, albums, setAlbums, loading } = props;
@@ -90,7 +91,7 @@ const AlbumList = (props) => {
           <ul className="image-list">{albumList}</ul>
         ) : (
           <div className="image-card text-center">
-            <div className="p-3 bg-dark h-100 w-100 text-light d-flex justify-content-center align-items-center">
+            <div className="welcome-container bg-dark text-light">
               <h3>You have no albums, create some!</h3>
             </div>
           </div>

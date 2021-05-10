@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import axios from "axios";
 
@@ -7,29 +7,23 @@ import AlbumImageCard from "./AlbumImageCard";
 
 import "../Home/ImageList.css";
 import "../Home/ImageCard.css";
+import "../Home/Welcome.css";
 
 const AlbumView = (props) => {
   let history = useHistory();
   const { id } = useParams();
   const { images, setImages } = props;
   const [album, setAlbum] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [albumLoading, setAlbumLoading] = useState(true);
   const [imagesLoading, setImagesLoading] = useState(true);
 
   useEffect(() => {
-    // async function getAlbumImages() {
-    //   const response = await axios.get(
-    //     `http://localhost:8080/albums/${id}/images`
-    //   );
-    //   setImages(response.data);
-    // }
-
     async function getAlbum() {
       const albumResponse = await axios.get(
         `http://localhost:8080/albums/${id}`
       );
       setAlbum(albumResponse.data);
-      setLoading(false);
+      setAlbumLoading(false);
     }
 
     getAlbum();
@@ -45,8 +39,8 @@ const AlbumView = (props) => {
     }
 
     getAlbumImages();
-  }, [setImages]);
-  console.log(images);
+  }, []);
+
   const imageList = images.map((albumImage, i) => {
     return (
       <AlbumImageCard
@@ -59,15 +53,9 @@ const AlbumView = (props) => {
     );
   });
 
-  if (loading) {
+  if (albumLoading || imagesLoading) {
     return null;
   }
-  if (imagesLoading) {
-    return null;
-  }
-  // if (!images.length) {
-  //   return null;
-  // }
 
   if (!album) {
     return (
@@ -82,7 +70,7 @@ const AlbumView = (props) => {
                 <h3>This album has been deleted</h3>
                 <h3>
                   <u>
-                    <a href="/albums">Create a new album!</a>
+                    <Link to="/albums">Create a new album!</Link>
                   </u>
                 </h3>
               </div>
@@ -102,14 +90,14 @@ const AlbumView = (props) => {
       {images.length ? (
         <div className="image-list">{imageList}</div>
       ) : (
-        <div className="d-flex justify-content-center">
+        <div className="mt-5 d-flex justify-content-center">
           <div className="image-card">
             <div className="card-image text-center">
-              <div className="p-3 bg-dark h-100 w-100 text-light d-flex flex-column justify-content-center align-items-center">
+              <div className="welcome-container p-3 bg-dark text-light flex-column justify-content-center">
                 <h3>Your album is empty,</h3>
                 <h3>
                   <u>
-                    <a href="/"> add some images!</a>
+                    <Link to="/"> add some images!</Link>
                   </u>
                 </h3>
               </div>

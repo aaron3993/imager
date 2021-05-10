@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import Select from "react-select";
 import axios from "axios";
@@ -112,13 +113,13 @@ const CollectionImageCard = (props) => {
       {validAlbum ? (
         <span className="valid">
           {validAlbumMsg}{" "}
-          <a href={`/albums/${selectedAlbum._id}`}>Go to album</a>
+          <Link to={`/albums/${selectedAlbum._id}`}>Go to album</Link>
         </span>
       ) : null}
       {invalidAlbum ? <span className="invalid">{invalidAlbumMsg}</span> : null}
       {noAlbum ? (
         <span className="invalid">
-          {noAlbumMsg} <a href="/albums">Create an album</a>
+          {noAlbumMsg} <Link to="/albums">Create an album</Link>
         </span>
       ) : null}
       <Button
