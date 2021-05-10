@@ -52,11 +52,7 @@
 @media (max-width: 400px) {
   .image-card {
     width: 20rem;
-    height: 20rem;
-  }
-
-  .card-image {
-    height: 40%;
+    height: 30rem;
   }
 }
 
