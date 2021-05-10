@@ -20,7 +20,7 @@ const AlbumView = (props) => {
   useEffect(() => {
     async function getAlbum() {
       const albumResponse = await axios.get(
-        `http://localhost:8080/albums/${id}`
+        `https://imager-album.herokuapp.com/albums/${id}`
       );
       setAlbum(albumResponse.data);
       setAlbumLoading(false);
@@ -32,7 +32,7 @@ const AlbumView = (props) => {
   useEffect(() => {
     async function getAlbumImages() {
       const response = await axios.get(
-        `http://localhost:8080/albums/${id}/images`
+        `https://imager-album.herokuapp.com/albums/${id}/images`
       );
       setImages(response.data);
       setImagesLoading(false);

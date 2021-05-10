@@ -18,7 +18,7 @@ const App = (props) => {
 
   useEffect(() => {
     async function getAlbums() {
-      let res = await axios.get("http://localhost:8080/albums");
+      let res = await axios.get("https://imager-album.herokuapp.com/albums");
       setAlbums(res.data);
       setLoading(false);
     }

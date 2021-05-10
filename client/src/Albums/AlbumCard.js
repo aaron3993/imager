@@ -14,7 +14,7 @@ const AlbumCard = (props) => {
   useEffect(() => {
     async function getAlbumCoverImage() {
       const response = await axios.get(
-        `http://localhost:8080/albums/${albumCard._id}/image`
+        `https://imager-album.herokuapp.com/albums/${albumCard._id}/image`
       );
       setCoverImage(response.data);
       setLoading(false);
@@ -25,7 +25,9 @@ const AlbumCard = (props) => {
 
   async function deleteAlbum() {
     try {
-      await axios.delete(`http://localhost:8080/albums/${albumCard._id}`);
+      await axios.delete(
+        `https://imager-album.herokuapp.com/albums/${albumCard._id}`
+      );
       const albumToBeRemovedIndex = albums.findIndex(
         (album) => album._id === albumCard._id
       );

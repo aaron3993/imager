@@ -15,7 +15,9 @@ const CollectionList = (props) => {
 
   useEffect(() => {
     async function getCollection() {
-      let res = await axios.get("http://localhost:8080/images/collection");
+      let res = await axios.get(
+        "https://imager-album.herokuapp.com/images/collection"
+      );
       setCollectionImages(res.data);
       setLoading(false);
     }
