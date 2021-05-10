@@ -31,10 +31,13 @@ const CollectionImageCard = (props) => {
 
   async function addToAlbum() {
     try {
-      const res = await axios.post(`http://localhost:8080/images/album`, {
-        album: selectedAlbum,
-        collectionImage: collectionImage,
-      });
+      const res = await axios.post(
+        `https://imager-album.herokuapp.com/images/album`,
+        {
+          album: selectedAlbum,
+          collectionImage: collectionImage,
+        }
+      );
       if (res.data.invalid) {
         setValidAlbum(false);
         setNoAlbum(false);
@@ -68,7 +71,7 @@ const CollectionImageCard = (props) => {
   async function removeFromCollection() {
     try {
       await axios.delete(
-        `http://localhost:8080/images/collection/${collectionImage._id}`
+        `https://imager-album.herokuapp.com/images/collection/${collectionImage._id}`
       );
       const collectionToBeRemovedIndex = collectionImages.findIndex(
         (image) => image._id === collectionImage._id

@@ -17,6 +17,10 @@ app.use(cors());
 app.use("/images", imageRoutes);
 app.use("/albums", albumRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to imager api");
+});
+
 const PORT = process.env.PORT || 8080;
 
 mongoose
