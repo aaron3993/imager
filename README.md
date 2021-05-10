@@ -4,6 +4,8 @@ Imager is a MERN stack app that allows a user to search for images through an ap
 ## Deployed App
 https://imager-album.netlify.app/
 
+![home-page](https://user-images.githubusercontent.com/62668975/117600904-e2f67200-b11a-11eb-8be7-2c210feb0860.png)
+
 ## Setup
 
 1. **Install dependencies for both server and client**
