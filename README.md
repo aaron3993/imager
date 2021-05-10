@@ -14,9 +14,7 @@ npm install
 
 2. **Setup database**
    
- ```sh
-Create a cluster in MongoDB Atlas and follow the instructions in the env.example file in the server folder to connect to it
-```
+- Create a cluster in MongoDB Atlas and follow the instructions in the env.example file in the server folder to connect to it
 
 3. **Start the server**
 
