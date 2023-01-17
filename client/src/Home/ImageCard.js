@@ -29,7 +29,7 @@ const ImageCard = (props) => {
   async function addToCollection() {
     try {
       const res = await axios.post(
-        "https://imager-album.herokuapp.com/images/collection",
+        `${process.env.REACT_APP_API_URL}/images/collection`,
         image
       );
       if (res.data.invalid) {
@@ -55,7 +55,7 @@ const ImageCard = (props) => {
   async function addToAlbum() {
     try {
       const res = await axios.post(
-        `https://imager-album.herokuapp.com/images/album`,
+        `${process.env.REACT_APP_API_URL}/images/album`,
         {
           album: selectedAlbum,
           image: image,

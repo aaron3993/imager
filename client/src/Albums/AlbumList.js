@@ -18,12 +18,9 @@ const AlbumList = (props) => {
   async function createAlbum(e) {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://imager-album.herokuapp.com/albums",
-        {
-          title: title,
-        }
-      );
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/albums`, {
+        title: title,
+      });
       if (res.data.invalid) {
         setValid(false);
         setInvalid(true);

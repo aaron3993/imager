@@ -12,7 +12,7 @@ const AlbumImageCard = (props) => {
   function removeFromAlbum() {
     try {
       axios.delete(
-        `https://imager-album.herokuapp.com/images/album/${album._id}/${albumImage._id}`
+        `${process.env.REACT_APP_API_URL}/images/album/${album._id}/${albumImage._id}`
       );
       const imageToBeRemovedIndex = images.findIndex(
         (imageCard) => albumImage === imageCard

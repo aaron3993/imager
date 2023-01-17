@@ -12,11 +12,11 @@ const CollectionList = (props) => {
   const { albums } = props;
   const [collectionImages, setCollectionImages] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  console.log(process.env.REACT_APP_API_URL);
   useEffect(() => {
     async function getCollection() {
       let res = await axios.get(
-        "https://imager-album.herokuapp.com/images/collection"
+        `${process.env.REACT_APP_API_URL}/images/collection`
       );
       setCollectionImages(res.data);
       setLoading(false);

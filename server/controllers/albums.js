@@ -15,7 +15,6 @@ export const getAlbumImages = async (req, res) => {
 
   try {
     const images = await Image.find({ album_id: id });
-    const albumImages = await Album.findById(id);
     res.status(200).json(images);
   } catch (err) {
     res.status(404).json({ message: err.message });

@@ -9,12 +9,8 @@ import ImageModal from "../ImageModal";
 import "../Home/ImageCard.css";
 
 const CollectionImageCard = (props) => {
-  const {
-    albums,
-    collectionImage,
-    collectionImages,
-    setCollectionImages,
-  } = props;
+  const { albums, collectionImage, collectionImages, setCollectionImages } =
+    props;
   const [option, setOption] = useState("");
   const [selectedAlbum, setSelectedAlbum] = useState({});
   const [validAlbum, setValidAlbum] = useState(false);
@@ -32,7 +28,7 @@ const CollectionImageCard = (props) => {
   async function addToAlbum() {
     try {
       const res = await axios.post(
-        `https://imager-album.herokuapp.com/images/album`,
+        `${process.env.REACT_APP_API_URL}/images/album`,
         {
           album: selectedAlbum,
           collectionImage: collectionImage,
@@ -71,7 +67,7 @@ const CollectionImageCard = (props) => {
   async function removeFromCollection() {
     try {
       await axios.delete(
-        `https://imager-album.herokuapp.com/images/collection/${collectionImage._id}`
+        `${process.env.REACT_APP_API_URL}/images/collection/${collectionImage._id}`
       );
       const collectionToBeRemovedIndex = collectionImages.findIndex(
         (image) => image._id === collectionImage._id
