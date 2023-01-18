@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Spin } from "antd";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -12,7 +13,7 @@ const CollectionList = (props) => {
   const { albums } = props;
   const [collectionImages, setCollectionImages] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(process.env.REACT_APP_API_URL);
+
   useEffect(() => {
     async function getCollection() {
       let res = await axios.get(
@@ -38,7 +39,11 @@ const CollectionList = (props) => {
   });
 
   if (loading) {
-    return null;
+    return (
+      <div className="mt-3 d-flex justify-content-center">
+        <Spin size="large" />
+      </div>
+    );
   }
 
   return (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Spin } from "antd";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import axios from "axios";
 
@@ -62,7 +63,11 @@ const AlbumList = (props) => {
     : null;
 
   if (loading) {
-    return null;
+    return (
+      <div className="mt-3 d-flex justify-content-center">
+        <Spin size="large" />
+      </div>
+    );
   }
 
   return (
